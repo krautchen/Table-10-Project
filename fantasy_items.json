@@ -1,0 +1,85 @@
+{
+    "weapons":[
+        {
+            "name":"Fist",
+            "type":["Blunt"],
+            "damage":1
+
+        },
+        {
+            "name":"Sword",
+            "type":["Slashing","Piercing"],
+            "damage":5
+
+        },
+        {
+            "name":"Club",
+            "type":["Blunt"],
+            "damage":4
+
+        }
+    ],
+
+    "armor":[
+        {
+            "name":"Shield",
+            "armor_value":1
+
+        },
+        {
+            "name":"Helmet",
+            "armor_value":1
+
+        },
+        {
+            "name":"Studded Leather",
+            "armor_value":5
+
+        },
+        {
+            "name":"Chainmail Shirt",
+            "armor_value":6
+
+        }
+    ],
+    "consumables":[
+        {
+            "name":"Light Healing Potion",
+            "healing_value":5
+
+        },
+        {
+            "name":"Medium Healing Potion",
+            "healing_value":10
+
+        },
+        {
+            "name":"Strong Healing Potion",
+            "healing_value":20
+
+        }
+    ],
+    "bags":[
+        {
+            "name":"Sack",
+            "size":5
+
+        },
+        {
+            "name":"Rucksack",
+            "size":10
+
+        },
+        {
+            "name":"Studded Leather",
+            "armor_value":5
+
+        },
+        {
+            "name":"Chainmail Shirt",
+            "armor_value":6
+
+        }
+    ]
+
+}
