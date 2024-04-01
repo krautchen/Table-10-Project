@@ -63,23 +63,16 @@
         {
             "name":"Sack",
             "size":5
-
         },
         {
             "name":"Rucksack",
             "size":10
-
         },
         {
-            "name":"Studded Leather",
-            "armor_value":5
-
-        },
-        {
-            "name":"Chainmail Shirt",
-            "armor_value":6
-
+            "name":"Lugggage",
+            "size":100
         }
+   
     ]
 
 }
