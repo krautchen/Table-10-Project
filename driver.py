@@ -18,36 +18,28 @@ class Map:
     def neswSetter(self, roomLimit):
         self.nesw = roomLimit
 
-    def roomChoice(self):
-        if "1" == self.choice:
-            return "3x3"
-        if "2" == self.choice:
-            return "1x5"
-        if "3" == self.choice:
-            return "4x1"
-        
+    def __repr__(self) -> str:
+        return self.choice
 
 class Rooms(Map):
-    def __init__(self):
+    def __init__(self, choice):
         self.currentRoom = 0
         self.status(self.currentRoom)
+        super().__init__(choice)
+        
 
     def selection(self):
-        if self.roomChoice == "3x3":
+        if self.super.choice == "3x3":
            self.threeByThree()
-
-        elif self.roomChoice == "1x5":
-           self.oneByFive()
-
-        elif self.roomChoice == "4x1":
-           self.fourByOne()
-    
+           self.status(self.currentRoom)
+           
         
     def threeByThree(self):
         if "1":
             self.neswSetter([False, True, True, False])
             self.currentRoom = 1
-            print(f"you are in room {self.currentRoom}")
+            self.status(self.currentRoom)
+            
         elif "2":
             self.neswSetter([False, True, True, True])
             self.currentRoom = 2
@@ -58,7 +50,9 @@ class Rooms(Map):
     def fourByOne(self):
         None
 
-        
+    def status(self, cr):
+        return f"you are currently in room {cr}"
 
-c = Map("1")
-print(c.roomChoice())
+   
+c = Rooms("1")
+print(c.threeByThree())
