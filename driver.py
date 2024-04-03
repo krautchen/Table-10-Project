@@ -33,12 +33,11 @@ class Rooms(Map):
            self.threeByThree()
            self.status(self.currentRoom)
            
-        
     def threeByThree(self):
         if "1":
             self.neswSetter([False, True, True, False])
             self.currentRoom = 1
-            self.status(self.currentRoom)
+            print(self.status(self.currentRoom))
             
         elif "2":
             self.neswSetter([False, True, True, True])
@@ -55,4 +54,4 @@ class Rooms(Map):
 
    
 c = Rooms("1")
-print(c.threeByThree())
+c.threeByThree()
