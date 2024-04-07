@@ -39,13 +39,17 @@ class Rooms(Map):
     def threeByThree(self, choice):
         #default starting value is 5
         if self.defaultVal == True:
+            choice = 5
+            self.defaultVal = False
+        if choice == 5:
+            self.currentRoom = 5
+            print(self.status(self.currentRoom))
             userInput = input("Which direction would you like to go? ") 
             p5 = {"n": 2, "e": 6, "s": 8, "w": 4}
             choice = p5.get(userInput)
-            self.defaultVal = False
 
         if choice == 1:
-            p1 = {"n": None, "e": 2, "s": 4, "w": None}
+            p1 = {"n": 1, "e": 2, "s": 4, "w": None} #p1 = {"n": 1, "e": 2, "s": 4, "w": 1}
             self.currentRoom = 1
             print(self.status(self.currentRoom))
             userInput = input("Which direction would you like to go? ") 
@@ -55,6 +59,54 @@ class Rooms(Map):
         elif choice == 2:
             p2 = {"n": None, "e": 3, "s": 5, "w": 1}
             self.currentRoom = 2
+            print(self.status(self.currentRoom))
+            userInput = input("Which direction would you like to go? ") 
+            choice = p2.get(userInput)
+            self.threeByThree(choice)
+
+        elif choice == 3:
+            p3 = {"n": None, "e": None, "s": 6, "w": 2}
+            self.currentRoom = 3
+            print(self.status(self.currentRoom))
+            userInput = input("Which direction would you like to go? ") 
+            choice = p3.get(userInput)
+            self.threeByThree(choice)
+
+        elif choice == 4:
+            p4 = {"n": 1, "e": 5, "s": 6, "w": None}
+            self.currentRoom = 4
+            print(self.status(self.currentRoom))
+            userInput = input("Which direction would you like to go? ") 
+            choice = p4.get(userInput)
+            self.threeByThree(choice)
+
+        elif choice == 6:
+            p6 = {"n": 3, "e": None, "s": 9, "w": 5}
+            self.currentRoom = 6
+            print(self.status(self.currentRoom))
+            userInput = input("Which direction would you like to go? ") 
+            choice = p6.get(userInput)
+            self.threeByThree(choice)
+
+        elif choice == 7:
+            p7 = {"n": 4, "e": 8, "s": None, "w": None}
+            self.currentRoom = 7
+            print(self.status(self.currentRoom))
+            userInput = input("Which direction would you like to go? ") 
+            choice = p7.get(userInput)
+            self.threeByThree(choice)
+
+        elif choice == 8:
+            p2 = {"n": 5, "e": 9, "s": None, "w": 7}
+            self.currentRoom = 8
+            print(self.status(self.currentRoom))
+            userInput = input("Which direction would you like to go? ") 
+            choice = p2.get(userInput)
+            self.threeByThree(choice)
+
+        elif choice == 9:
+            p2 = {"n": 6, "e": None, "s": None, "w": 8}
+            self.currentRoom = 9
             print(self.status(self.currentRoom))
             userInput = input("Which direction would you like to go? ") 
             choice = p2.get(userInput)
