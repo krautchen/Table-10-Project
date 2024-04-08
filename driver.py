@@ -29,7 +29,6 @@ class Rooms(Map):
         self.prompt = "Which direction would you like to go? "
         self.neswError = "please choose a movement of nesw" #are we going to tell them what map theyre on?
         
-
     def selection(self):
         if self.super.choice == "3x3":
            self.threeByThree("5")
@@ -38,6 +37,7 @@ class Rooms(Map):
     #optimize later? my eyes hurt staring at this shit
     def threeByThree(self, choice):
         #default starting room is 5
+        self.currentRoom = choice
         if self.defaultVal == True:
             choice = 5
             self.defaultVal = False
@@ -56,10 +56,8 @@ class Rooms(Map):
 
             self.threeByThree(choice)
 
-
         if choice == 1:
             p1 = {"n": 1, "e": 2, "s": 4, "w": "invalid movement"} 
-            self.currentRoom = 1
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -74,7 +72,6 @@ class Rooms(Map):
 
         elif choice == 2:
             p2 = {"n": "invalid movement", "e": 3, "s": 5, "w": 1}
-            self.currentRoom = 2
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -90,7 +87,6 @@ class Rooms(Map):
         elif choice == 3:
             p3 = {"n": "invalid movement", "e": "invalid movement", 
                   "s": 6, "w": 2}
-            self.currentRoom = 3
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -105,7 +101,6 @@ class Rooms(Map):
 
         elif choice == 4:
             p4 = {"n": 1, "e": 5, "s": 6, "w": "invalid movement"}
-            self.currentRoom = 4
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -120,7 +115,6 @@ class Rooms(Map):
 
         elif choice == 6:
             p6 = {"n": 3, "e": "invalid movement", "s": 9, "w": 5}
-            self.currentRoom = 6
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -136,7 +130,6 @@ class Rooms(Map):
         elif choice == 7:
             p7 = {"n": 4, "e": 8, "s": "invalid movement", 
                   "w": "invalid movement"}
-            self.currentRoom = 7
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -151,7 +144,6 @@ class Rooms(Map):
 
         elif choice == 8:
             p8 = {"n": 5, "e": 9, "s": "invalid movement", "w": 7}
-            self.currentRoom = 8
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -167,7 +159,6 @@ class Rooms(Map):
         elif choice == 9:
             p9 = {"n": 6, "e": "invalid movement", 
                   "s": "invalid movement", "w": 8}
-            self.currentRoom = 9
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -179,22 +170,12 @@ class Rooms(Map):
                  self.threeByThree(self.invalidMovementMethod())
 
             self.threeByThree(choice)
-
-    def invalidMovementMethod(self):
-        print(self.invalidDirection)
-        return self.currentRoom
         
-
-    def neswErrorMethod(self):
-        print(self.neswError)
-        return self.currentRoom
-        
-        
-    def oneByFive(self, choice):
+    def oneByFive(self, choice): #add default room
+        self.currentRoom = choice
         if choice == 1:
             p1 = {"n": "invalid movement", "e": "invalid movement", "s": 2,
                    "w": "invalid movement"} 
-            self.currentRoom = 1
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -210,7 +191,6 @@ class Rooms(Map):
         elif choice == 2:
             p2 = {"n": 1, "e": "invalid movement", "s": 3,
                    "w": "invalid movement"}
-            self.currentRoom = 2
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -226,7 +206,7 @@ class Rooms(Map):
         elif choice == 3:
             p3 = {"n": 2, "e": "invalid movement", 
                   "s": 4, "w": "invalid movement"}
-            self.currentRoom = 3
+        
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -242,7 +222,6 @@ class Rooms(Map):
         elif choice == 4:
             p4 = {"n": 3, "e": "invalid movement", 
                   "s": "invalid movement", "w": "invalid movement"}
-            self.currentRoom = 4
             print(self.status(self.currentRoom))
             userInput = input(self.prompt) 
 
@@ -260,7 +239,15 @@ class Rooms(Map):
 
     def status(self, cr):
         return f"you are currently in room {cr}"
+    
+    def invalidMovementMethod(self):
+        print(self.invalidDirection)
+        return self.currentRoom
 
+    def neswErrorMethod(self):
+        print(self.neswError)
+        return self.currentRoom
+        
    
 c = Rooms("1")
 c.oneByFive(1)
