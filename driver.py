@@ -11,7 +11,6 @@ created
 
 class Map:
     def __init__(self, choice):
-        self.nesw = [False, False, False, False]
         self.choice = choice
 
     def neswSetter(self, roomLimit):
@@ -38,8 +37,7 @@ class Rooms(Map):
     
     #optimize later? my eyes hurt staring at this shit
     def threeByThree(self, choice):
-        #default starting value is 5
-        
+        #default starting room is 5
         if self.defaultVal == True:
             choice = 5
             self.defaultVal = False
@@ -50,11 +48,14 @@ class Rooms(Map):
             p5 = {"n": 2, "e": 6, "s": 8, "w": 4}
 
             if userInput not in p5:
-                  self.neswError()
+                   self.threeByThree(self.neswErrorMethod())
 
             choice = p5.get(userInput)
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                self.threeByThree(self.invalidMovementMethod())
+
+            self.threeByThree(choice)
+
 
         if choice == 1:
             p1 = {"n": 1, "e": 2, "s": 4, "w": "invalid movement"} 
@@ -63,12 +64,12 @@ class Rooms(Map):
             userInput = input(self.prompt) 
 
             if userInput not in p1:
-                self.neswError()
-                self.threeByThree(self.currentRoom)
+                 self.threeByThree(self.neswErrorMethod())
 
             choice = p1.get(userInput)
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                 self.threeByThree(self.invalidMovementMethod())
+
             self.threeByThree(choice)
 
         elif choice == 2:
@@ -78,11 +79,12 @@ class Rooms(Map):
             userInput = input(self.prompt) 
 
             if userInput not in p2:
-                self.neswError()
+                 self.threeByThree(self.neswErrorMethod())
             choice = p2.get(userInput)
 
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                 self.threeByThree(self.invalidMovementMethod())
+
             self.threeByThree(choice)
 
         elif choice == 3:
@@ -93,11 +95,12 @@ class Rooms(Map):
             userInput = input(self.prompt) 
 
             if userInput not in p3:
-                self.neswError()
+                 self.threeByThree(self.neswErrorMethod())
 
             choice = p3.get(userInput)
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                self.threeByThree(self.invalidMovementMethod())
+
             self.threeByThree(choice)
 
         elif choice == 4:
@@ -107,11 +110,12 @@ class Rooms(Map):
             userInput = input(self.prompt) 
 
             if userInput not in p4:
-                self.neswError()
+                self.threeByThree(self.neswErrorMethod())
 
             choice = p4.get(userInput)
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                 self.threeByThree(self.invalidMovementMethod())
+
             self.threeByThree(choice)
 
         elif choice == 6:
@@ -121,11 +125,12 @@ class Rooms(Map):
             userInput = input(self.prompt) 
 
             if userInput not in p6:
-                self.neswError()
+               self.threeByThree(self.neswErrorMethod())
 
             choice = p6.get(userInput)
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                 self.threeByThree(self.invalidMovementMethod())
+
             self.threeByThree(choice)
 
         elif choice == 7:
@@ -136,11 +141,12 @@ class Rooms(Map):
             userInput = input(self.prompt) 
 
             if userInput not in p7:
-                self.neswError()
+                 self.threeByThree(self.neswErrorMethod())
 
             choice = p7.get(userInput)
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                 self.threeByThree(self.invalidMovementMethod())
+
             self.threeByThree(choice)
 
         elif choice == 8:
@@ -150,11 +156,12 @@ class Rooms(Map):
             userInput = input(self.prompt) 
 
             if userInput not in p8:
-                self.neswError()
+                self.threeByThree(self.neswErrorMethod())
 
             choice = p8.get(userInput)
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                 self.threeByThree(self.invalidMovementMethod())
+
             self.threeByThree(choice)
 
         elif choice == 9:
@@ -165,24 +172,88 @@ class Rooms(Map):
             userInput = input(self.prompt) 
 
             if userInput not in p9:
-                self.neswError()
+                 self.threeByThree(self.neswErrorMethod())
 
             choice = p9.get(userInput)
             if choice == "invalid movement":
-                self.invalidMovementMethod()
+                 self.threeByThree(self.invalidMovementMethod())
+
             self.threeByThree(choice)
 
     def invalidMovementMethod(self):
         print(self.invalidDirection)
-        self.threeByThree(self.currentRoom)
+        return self.currentRoom
+        
 
     def neswErrorMethod(self):
         print(self.neswError)
-        self.threeByThree(self.currentRoom)
-       
-            
-    def oneByFive(self):
-        None
+        return self.currentRoom
+        
+        
+    def oneByFive(self, choice):
+        if choice == 1:
+            p1 = {"n": "invalid movement", "e": "invalid movement", "s": 2,
+                   "w": "invalid movement"} 
+            self.currentRoom = 1
+            print(self.status(self.currentRoom))
+            userInput = input(self.prompt) 
+
+            if userInput not in p1:
+                self.oneByFive(self.neswErrorMethod())
+                
+            choice = p1.get(userInput)
+            if choice == "invalid movement":
+                self.oneByFive(self.invalidMovementMethod())
+
+            self.oneByFive(choice)
+
+        elif choice == 2:
+            p2 = {"n": 1, "e": "invalid movement", "s": 3,
+                   "w": "invalid movement"}
+            self.currentRoom = 2
+            print(self.status(self.currentRoom))
+            userInput = input(self.prompt) 
+
+            if userInput not in p2:
+                self.oneByFive(self.neswErrorMethod())
+            choice = p2.get(userInput)
+
+            if choice == "invalid movement":
+                self.oneByFive(self.invalidMovementMethod())
+
+            self.oneByFive(choice)
+
+        elif choice == 3:
+            p3 = {"n": 2, "e": "invalid movement", 
+                  "s": 4, "w": "invalid movement"}
+            self.currentRoom = 3
+            print(self.status(self.currentRoom))
+            userInput = input(self.prompt) 
+
+            if userInput not in p3:
+                self.oneByFive(self.neswErrorMethod())
+
+            choice = p3.get(userInput)
+            if choice == "invalid movement":
+                self.oneByFive(self.invalidMovementMethod())
+
+            self.oneByFive(choice)
+
+        elif choice == 4:
+            p4 = {"n": 3, "e": "invalid movement", 
+                  "s": "invalid movement", "w": "invalid movement"}
+            self.currentRoom = 4
+            print(self.status(self.currentRoom))
+            userInput = input(self.prompt) 
+
+            if userInput not in p4:
+                self.oneByFive(self.neswErrorMethod())
+
+            choice = p4.get(userInput)
+            if choice == "invalid movement":
+                self.oneByFive(self.invalidMovementMethod())
+
+            self.oneByFive(choice)
     
     def fourByOne(self):
         None
@@ -192,4 +263,4 @@ class Rooms(Map):
 
    
 c = Rooms("1")
-c.threeByThree("1")
+c.oneByFive(1)
