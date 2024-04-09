@@ -1,7 +1,12 @@
 import json
 import re
-# puzzle function is called when a user interacts with a room that has the
-# has_puzzle attribute (or something like that)
+
+# dice roll should be after direction selection because then you can populate 
+# the status of enemies, items, whether there's a puzzle in the new currentRoom
+# based on the result
+# puzzle function is called based on a dice roll
+# if the roll is an odd number then the puzzle function is called and a random 
+# puzzle is loaded from the json along with any necessary items, enemies, etc.
 
 # first, the user has to know that they encountered a room like that (user
 # should have a current_room attribute assigned to a Room object)
