@@ -1,6 +1,6 @@
 import json
 import re
-
+from random import choice, randint
 # dice roll should be after direction selection because then you can populate 
 # the status of enemies, items, whether there's a puzzle in the new currentRoom
 # based on the result
@@ -12,12 +12,18 @@ import re
 # should have a current_room attribute assigned to a Room object)
 
 def puzzle():
+    """Generates a random puzzle if the dice roll requires it.
+    
+    Side effects:
+        Prints a puzzle prompt and results of the guesses to stdout.
+    """
     guess_count = 0
     with open("puzzles.json", "r", encoding="utf-8") as file:
-        puzzle1 = json.load(file)
+        puzzles = json.load(file)
+        current_puzzle = puzzles[f"{randint(1, len(puzzles))}"]
     #if player.current_room.has_puzzle:
-        code = puzzle1["1"]["code"]
-        print(puzzle1["1"]["prompt"])
+        code = current_puzzle["code"]
+        print(current_puzzle["prompt"])
     while guess_count < 5:
         guess = input("Please enter your guess: ")
         if len(guess) == 0:
@@ -31,7 +37,7 @@ def puzzle():
             else:
                 print(f"{guess} is incorrect!")
                 guess_count += 1
-                if guess_count == 5:
-                    print("Sorry, you have run out of guesses.")
-                    # keep character in current_room, do nothing
-print(puzzle())
+        if guess_count == 5:
+            print("Sorry, you have run out of guesses.")
+                # keep character in current_room, do nothing
+puzzle()
