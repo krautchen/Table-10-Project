@@ -1,6 +1,6 @@
 {
     "1": {
         "code": "[A-Z]\\d[A-Z]{2}\\s[A-Z]{2}\\d{2}[A-Z]\\d[A-Z]\\d", 
-        "prompt": "You have encountered a locked room. To enter,you have 5 guesses enter the correct code from 4 clues.\n1. On the wall, someone wrote: '2 H0V1 0 S4P1R 0W1S3M1 S1CR1T.' Weird.\n2. There are 13 characters including uppercase letters, numbers, and spaces.\n3. A question mark and a chest are engraved on the door above the keypad.\n4. Two images and two words, one solution."
+        "prompt": "You have encountered a locked room. To enter,you have 5 guesses enter the correct code from 4 clues.\n1. On the wall, someone wrote: '2 H0V1 A S4PER 0W1S3ME S1CR1T. The vowels tell all.' Weird.\n2. There are 13 characters including uppercase letters, numbers, and spaces.\n3. A question mark and a chest are engraved on the door above the keypad.\n4. Two images and two words, one solution."
     }
 }
