@@ -14,14 +14,9 @@ class Map:
         self.choice = choice
         self.prompt = "Which direction would you like to go? "
         self.invalidDirection = "invalid choice, please choose another directon"
-        self.prompt = "Which direction would you like to go? "
-        self.neswError = "please choose a movement of nesw" #are we going to tell them what map theyre on?
-        
+        self.neswError = "please choose a movement of nesw" 
         self.neswCheck = ["n", "s", "e", "w"]
         #item and puzzle random and flag to say they already did it
-
-    def neswSetter(self, roomLimit):
-        self.nesw = roomLimit
 
     def mapDriver(self):
         playInput = "would you like to continue? "
@@ -90,8 +85,7 @@ class Map:
                     play = False
                     break
             movement = currentRoom[userInput]
-
-            
+        
     def __repr__(self) -> str:
         return self.choice
     
@@ -101,13 +95,10 @@ class Map:
     def invalidMovementMethod(self):
         print(self.invalidDirection)
         
-
     def neswErrorMethod(self):
         print(self.neswError)
 
 
-        
-   
 c = Map("3x3")
 c.mapDriver()
 
