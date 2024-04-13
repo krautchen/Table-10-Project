@@ -1,18 +1,21 @@
 import json
 import re
-from random import choice, randint
+from random import randint
+# -- Notes
+# either populated from a dice roll or called when you move in certain directions
+
 # dice roll should be after direction selection because then you can populate 
 # the status of enemies, items, whether there's a puzzle in the new currentRoom
 # based on the result
-# puzzle function is called based on a dice roll
+
 # if the roll is an odd number then the puzzle function is called and a random 
 # puzzle is loaded from the json along with any necessary items, enemies, etc.
-
-# first, the user has to know that they encountered a room like that (user
-# should have a current_room attribute assigned to a Room object)
+# character should have a current_room attribute to reference and update within function
 
 def puzzle():
-    """Generates a random puzzle if the dice roll requires it.
+    """Generates a random puzzle if the dice roll requires it. Updates 
+    character's current_room attribute conditionally based on puzzle
+    completion.
     
     Side effects:
         Prints a puzzle prompt and results of the guesses to stdout.
@@ -32,10 +35,10 @@ def puzzle():
         else:
             if re.search(code, guess):
                 print(f"{guess} is correct!")
-                break
                 # move character into room by setting current_room attribute to next room
+                break
             else:
-                print(f"{guess} is incorrect!")
+                print(f"{guess} is incorrect! Please try again.")
                 guess_count += 1
         if guess_count == 5:
             print("Sorry, you have run out of guesses.")
