@@ -49,3 +49,5 @@ def puzzle():
             print("Sorry, you have run out of guesses.")
             return "failed"
                 # keep character in current_room, do nothing
+if __name__ == "__main__":
+    puzzle()
