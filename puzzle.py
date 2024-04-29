@@ -27,6 +27,7 @@ def puzzle():
     #if player.current_room.has_puzzle:
         code = current_puzzle["code"]
         print(current_puzzle["prompt"])
+        hint = current_puzzle["hint"]
     while guess_count < 5:
         guess = input("Please enter your guess: ")
         if len(guess) == 0:
@@ -36,11 +37,15 @@ def puzzle():
             if re.search(code, guess):
                 print(f"{guess} is correct!")
                 # move character into room by setting current_room attribute to next room
-                break
+                return "complete"
             else:
                 print(f"{guess} is incorrect! Please try again.")
+                if input("Would you like a hint? (y/n): ") == "y":
+                    print(f"Hint: {hint}")
+                else:
+                    pass
                 guess_count += 1
         if guess_count == 5:
             print("Sorry, you have run out of guesses.")
+            return "failed"
                 # keep character in current_room, do nothing
-puzzle()

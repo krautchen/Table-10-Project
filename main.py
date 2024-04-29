@@ -1,7 +1,7 @@
 
 from items import *
 from character import *
-from monsters import
+from monster import load_monsters
 
 class Game:
     def __init__(self):
