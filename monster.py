@@ -2,30 +2,31 @@ from character import *
 import json
 
 def load_monsters(file_path):
+    monsters = {"trash":[],"boss":[]}
     with open(file_path, 'r') as file:
         monster_data = json.load(file)
-        print(file)
-        monsters = []
-        for monster in monster_data:
-            monster_obj = Monster(
-                character_type=monster.get('character type'),
-                name=monster.get('name'),
-                hp=monster.get('hp'),
-                strength=monster['strength'],
-                defense=monster['defense'],
-                dexterity=monster['dexterity'],
-                hits=monster['hits'],
-                weapon=monster['weapon'],
-                armor={},
-                bag=monster['bag']
-            )
-            monsters.append(monster_obj)
+        for category,monster_list in monster_data.items():
+            for monster in monster_list:
+                monster_obj = Monster(
+                    character_type=monster['character type'],
+                    name=monster["name"],
+                    hp=monster['hp'],
+                    strength=monster['strength'],
+                    defense=monster['defense'],
+                    dexterity=monster['dexterity'],
+                    hits=monster['hits'],
+                    weapon=monster['weapon'],
+                    armor=monster['armor'],
+                    bag=monster['bag'],
+                    exp_val=monster['exp_val']
+                )
+                monsters[category].append(monster_obj)
     return monsters
 
 class Monster(Character):
     def __init__(self,
                 character_type='Monster',
-                name='Player',
+                name='Groht',
                 level=1,         
                 hp=1,
                 strength=1,
@@ -34,10 +35,12 @@ class Monster(Character):
                 hits=1,
                 weapon={},
                 armor={},
-                bag=[]):
-        super().__init__(name,level,hp,strength,defense,dexterity,
+                bag=[],
+                exp_val=1):
+        super().__init__(character_type,name,level,hp,strength,defense,dexterity,
                          hits,weapon,armor,bag)
-        self.type=character_type
+        self.exp_val=exp_val
+
         
         
     def __repr__(self):
@@ -53,5 +56,6 @@ class Monster(Character):
             f"hits={self.hits}, "
             f"weapon={self.weapon}, "
             f"armor={self.armor}, "
-            f"bag={self.bag})"
+            f"bag={self.bag}),"
+            f"exp_val={self.exp_val})"
         )

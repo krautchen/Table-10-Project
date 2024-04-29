@@ -1,24 +1,33 @@
 # Purpose of each File in Directory
 #### `main.py`
 - 
+
 #### `charcter.py`
 - Contains the class for creating a Character object.
+
 #### `driver.py`
 - 
+
 #### `items.py`
 - Contains the class for creating Item objects, including
 Weapons, Armor, Consumables, and Bags.
+
 #### `monster.py`
 - Contains the class for creating a Monster object, which 
 inherits most of its attributes from the Character object.
+
 #### `puzzle.py`
 - 
+
 #### `fantasy_items.json`
 - A dictionary with four lists of dictionaries for items 
+
 #### `fantasy_monsters.json`
 - A dictionary with two lists of dictionaries for monsters
+
 #### `puzzles.json`
 - 
+
 #### `rooms.json`
 - 
 
@@ -50,3 +59,4 @@ inherits most of its attributes from the Character object.
 <br/>
 
 # Annotated Bibiolgraphy
+- https://www.geeksforgeeks.org/underscore-_-python/ _ used as throwaway variable in the d6 function for loop

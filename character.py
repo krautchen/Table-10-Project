@@ -8,10 +8,12 @@ def d6(number):
         number (int): how many dice to roll
 
     Returns:
-        int: a number from 1 to 6
+        int: sum of dice rolls
     """
-    result=number*randrange(1,6)
-    return result
+    if number>1:
+        return sum([randrange(1, 7) for _ in range(number)])
+    else:
+        return randrange(1,7)
 
 class CharacterCreator:
     def __init__(self):
@@ -88,7 +90,7 @@ class Character():
         """
         if d6(self.dexterity)+self.dexterity > d6(target.defense):
             damage = (d6(self.strength)) * self.weapon.damage
-            total_damage = damage - self.armor.armor_value
+            total_damage = damage - (self.armor.armor_value+self.defense)
             
             if total_damage > 0:
                 target.take_damage(total_damage)
@@ -97,6 +99,8 @@ class Character():
             else:
                 print(f"{self.name} fails to damage {target.name}. "+
                       f"{target.name}'s armor is too tough")
+        else:
+            return print(f"{target.name} deftly dodges.")
         
     def take_damage(self,total_damage):
         self.hp-=total_damage
@@ -108,4 +112,10 @@ class Character():
         print(f"""{self.name} has {self.hp} HP""")
         
     def level_up(self,stat):
-        raise NotImplemented    
+        raise NotImplemented
+    
+    def equip_weapon(self,weapon):
+        self.weapon=weapon
+        
+    def equip_armor(self,armor):
+        self.armor=armor

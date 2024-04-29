@@ -1,7 +1,7 @@
 {
   "trash":[ 
     {
-      "character_type": "monster",
+      "character type": "trash",
       "name": "Goblin",
       "hp": 5,
       "strength": 1,
@@ -10,13 +10,14 @@
       "hits":1,
       "weapon": {},
       "armor":{},
-      "bag":[]
+      "bag":[],
+      "exp_val": 1
     }
     ],
 
     "boss":[ 
     {
-      "character_type": "monster",
+      "character type": "boss",
       "name": "Balrog",
       "hp": 10,
       "strength": 2,
@@ -25,7 +26,8 @@
       "hits":1,
       "weapon": {},
       "armor":{},
-      "bag":[]
+      "bag":[],
+      "exp_val": 5
     }
-    ],
+    ]
   }

@@ -4,20 +4,20 @@ def load_items(items_file):
     with open(items_file, 'r') as file:
         data = json.load(file)
         for category, item_list in data.items():
-            for item_data in item_list:
+            for item in item_list:
                 if category == "weapons":
-                    item = Weapon(item_data['name'],
-                                  item_data['type'],
-                                  item_data['damage'])
+                    item = Weapon(item['name'],
+                                  item['type'],
+                                  item['damage'])
                 elif category == "armor":
-                    item = Armor(item_data['name'],
-                                 item_data['armor_value'])
+                    item = Armor(item['name'],
+                                 item['armor_value'])
                 elif category == "consumables":
-                    item = Consumable(item_data['name'],
-                                      item_data['healing_value'])
+                    item = Consumable(item['name'],
+                                      item['healing_value'])
                 elif category == "bags":
-                    item = Bag(item_data['name'],
-                               item_data['size'])
+                    item = Bag(item['name'],
+                               item['size'])
                 items[category].append(item)
     return items
 
