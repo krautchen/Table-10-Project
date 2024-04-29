@@ -43,7 +43,7 @@ class Character():
     """A basic character tempalte
     """
     def __init__(self,
-                character_type=None,
+                character_type='Player',
                 name='Player',
                 level=1,         
                 hp=1,
