@@ -1,5 +1,7 @@
 import json
 import random
+import sys
+from argparse import ArgumentParser
 #from puzzle import puzzle as p
 """Functionality check-list for map
 -building rooms
@@ -14,8 +16,8 @@ created
 """
 
 class Map:
-    def __init__(self, choice):
-        self.choice = choice
+    def __init__(self):
+        #self.choice = choice
         self.prompt = "Which direction would you like to go? "
         self.invalidDirection = "invalid choice, please choose another directon"
         self.neswError = "please choose a movement of nesw" 
@@ -24,9 +26,9 @@ class Map:
         self.gameEnd = False 
         #item and puzzle random and flag to say they already did it
 
-    def mapDriver(self):
+    def mapDriver(self, filepath):
 
-        with open ("rooms.json", "r", encoding= "utf-8") as f:
+        with open (filepath, "r", encoding= "utf-8") as f:
             map = json.load(f)
         
 
@@ -95,8 +97,8 @@ class Map:
                 movement = currentRoom[userInput]
            
         
-    def __repr__(self) -> str:
-        return self.choice
+    #def __repr__(self) -> str:
+        #return self.choice
     
     def status(self, cr):
         return f"you are currently in room {cr}"
@@ -130,14 +132,26 @@ class Map:
                 else:
                     print("invalid answer, please try again.")
                     answer = input(self.playInput).lower()
-                    
             else: 
                     print("invalid answer, please try again.")
                     answer = input(self.playInput).lower()
                   
-                    
+def main(filepath):
+    m = Map()
+    userInput = input("would you like to play? ").lower()
+    if userInput == "yes":
+        m.mapDriver(filepath)
+    else:
+        print("goodbye!")
+        
+def parse_args(arglist):
+    parser = ArgumentParser()
+    parser.add_argument("filepath", help = "path to the map(s)")
+    return parser.parse_args(arglist)
 
+if __name__ == "__main__":  
+    args = parse_args(sys.argv[1:])
+    main(args.filepath)
 
-
-c = Map("3x3")
-c.mapDriver()
+#c = Map("3x3")
+#c.mapDriver()
