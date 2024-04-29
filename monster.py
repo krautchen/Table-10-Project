@@ -1,25 +1,25 @@
 from character import *
+import json
 
 def load_monsters(file_path):
     with open(file_path, 'r') as file:
         monster_data = json.load(file)
-
-    monsters = []
-    for monster in monster_data:
-        monster_obj = Monster(
-            character_type=monster['character_type'],
-            name=monster['name'],
-            hp=monster['hp'],
-            strength=monster['strength'],
-            defense=monster['defense'],
-            dexterity=monster['dexterity'],
-            hits=monster['hits'],
-            weapon=monster['weapon'],
-            armor={},
-            bag=monster['contents']
-        )
-        monsters.append(monster_obj)
-
+        print(file)
+        monsters = []
+        for monster in monster_data:
+            monster_obj = Monster(
+                character_type=monster.get('character type'),
+                name=monster.get('name'),
+                hp=monster.get('hp'),
+                strength=monster['strength'],
+                defense=monster['defense'],
+                dexterity=monster['dexterity'],
+                hits=monster['hits'],
+                weapon=monster['weapon'],
+                armor={},
+                bag=monster['bag']
+            )
+            monsters.append(monster_obj)
     return monsters
 
 class Monster(Character):
@@ -37,4 +37,21 @@ class Monster(Character):
                 bag=[]):
         super().__init__(name,level,hp,strength,defense,dexterity,
                          hits,weapon,armor,bag)
-        self.type='Monster'
+        self.type=character_type
+        
+        
+    def __repr__(self):
+        # Create a detailed representation of the Monster
+        return (
+            f"Monster(name={self.name}, "
+            f"type={self.type}, "
+            f"level={self.level}, "
+            f"hp={self.hp}, "
+            f"strength={self.strength}, "
+            f"defense={self.defense}, "
+            f"dexterity={self.dexterity}, "
+            f"hits={self.hits}, "
+            f"weapon={self.weapon}, "
+            f"armor={self.armor}, "
+            f"bag={self.bag})"
+        )

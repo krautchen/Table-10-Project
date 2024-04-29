@@ -1,13 +1,14 @@
 from random import randrange
+from items import Weapon,Armor,Bag
 
 def d6(number):
     """Roll a six sided die
 
     Args:
-        number (_type_): _description_
+        number (int): how many dice to roll
 
     Returns:
-        _type_: _description_
+        int: a number from 1 to 6
     """
     result=number*randrange(1,6)
     return result
@@ -44,12 +45,12 @@ class Character():
     """
     def __init__(self,
                 character_type='Player',
-                name='Player',
+                name='Gandalf',
                 level=1,         
-                hp=1,
-                strength=1,
-                defense=1,
-                dexterity=1,
+                hp=10,
+                strength=2,
+                defense=2,
+                dexterity=2,
                 hits=1,
                 weapon={},
                 armor={},
@@ -75,7 +76,7 @@ class Character():
         self.hits=hits
         self.weapon= Weapon(name,type,damage=1)
         self.armor=Armor(name,armor_value=1)
-        self.bag=Bag(name='Sack',size=1,contents=['rope'])
+        self.bag=Bag(name='Sack',size=1,contents=[])
                         
     def attack(self,target):
         """Generic attack
@@ -88,9 +89,11 @@ class Character():
         if d6(self.dexterity)+self.dexterity > d6(target.defense):
             damage = (d6(self.strength)) * self.weapon.damage
             total_damage = damage - self.armor.armor_value
+            
             if total_damage > 0:
                 target.take_damage(total_damage)
                 return print(f"{self.name} attacks {target.name} for {total_damage} damage.")
+            
             else:
                 print(f"{self.name} fails to damage {target.name}. "+
                       f"{target.name}'s armor is too tough")
@@ -106,41 +109,3 @@ class Character():
         
     def level_up(self,stat):
         raise NotImplemented    
-
-class Item:
-    def __init__(self, name):
-        self.name = name
-
-class Weapon(Item):
-    def __init__(self, name, type, damage):
-        super().__init__(name)
-        self.type = type
-        self.damage = damage
-
-class Armor(Item):
-    def __init__(self, name, armor_value):
-        super().__init__(name)
-        self.armor_value = armor_value
-
-class Consumable(Item):
-    def __init__(self, name, healing_value):
-        super().__init__(name)
-        self.healing_value = healing_value
-        
-    def heal(self,target):
-        target.heal(self.healing_value)
-
-class Bag(Item):
-    def __init__(self, name, size, contents=None):
-        super().__init__(name)
-        self.size = size
-        self.contents = contents or []
-        
-    def store(self,item):
-        self.contents.append(item)
-    
-    def remove(self,item):
-        self.contents.remove(item)
-
-    def organize(self):
-        sorted(self.contents,key=lambda bag: bag[1])

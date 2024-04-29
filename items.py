@@ -69,4 +69,4 @@ class Bag(Item):
         self.contents.remove(item)
 
     def organize(self):
-        self.contents=sorted(self.contents,key=lambda bag: bag['name'])
+        self.contents=sorted(self.contents,key=lambda item: item.name)
