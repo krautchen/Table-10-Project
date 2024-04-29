@@ -2,7 +2,8 @@ import json
 import random
 import sys
 from argparse import ArgumentParser
-#from puzzle import puzzle as p
+from puzzle import puzzle as p
+#answer is L3ST TR10S4R1
 """Functionality check-list for map
 -add non square/rectangle rooms
 -add the items to each of the rooms after functionality for such has been 
@@ -18,10 +19,13 @@ class Map:
         self.neswCheck = ["n", "s", "e", "w"]
         self.playInput = "would you like to continue? "
         self.gameEnd = False 
+        self.puzzleEnd = "not complete"
         #item and puzzle random and flag to say they already did it
+        #load items and create objects for each of the item types and rand 
+        #between zero and two to see what those types are made
+        #look at the example file n shit for the one example
 
-    def mapDriver(self, filepath):
-
+    def mapDriver(self, filepath): #add back the filepath arguement
         with open (filepath, "r", encoding= "utf-8") as f:
             map = json.load(f)
         
@@ -30,6 +34,13 @@ class Map:
         playRoom = map[randomMap]
         #picks random room in map
         randomRoom= str(random.randint(1, len(map[randomMap])))
+        #random chance for the puzzle to appear
+        puzzleChanceList = []
+        willGetPuzzle = [1, 2, 3]
+        for i in range(0,3):
+            puzzleChance = random.randint(1, 10)
+            puzzleChanceList.append(puzzleChance)
+        print(puzzleChanceList)    
 
         #game start
         currentRoom = playRoom[randomRoom]
@@ -50,7 +61,16 @@ class Map:
             movement = currentRoom[userInput]
 
         while(self.gameEnd != True):
+            #ask for attribute that returns if the game has been completed
+            # so i can tell my method that the puzzle has been completed
             
+            if self.puzzleEnd != "complete":
+                for j in puzzleChanceList:
+                    if j in willGetPuzzle:
+                        self.puzzleEnd = p()
+                    if self.puzzleEnd == "complete":
+                        break     
+                    
             previous = currentRoom["current"]
 
             if userInput not in self.neswCheck:
@@ -141,5 +161,5 @@ if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
     main(args.filepath)
 
-#c = Map("3x3")
-#c.mapDriver()
+c = Map()
+c.mapDriver()
