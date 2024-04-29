@@ -1,0 +1,15 @@
+[
+    {
+      "character_type": "monster",
+      "name": "Goblin",
+      "hp": 5,
+      "strength": 1,
+      "defense": 1,
+      "dexterity": 1,
+      "weapon": {
+      },
+      "weapon_type": "Lethal",
+      "hits": 1,
+      "contents": []
+    }
+   ]

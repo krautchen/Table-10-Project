@@ -69,10 +69,4 @@ class Bag(Item):
         self.contents.remove(item)
 
     def organize(self):
-        sorted(self.contents,key=lambda bag: bag[1])
-        
-items=load_items('C:/Users/noahh/OneDrive/Documents/GitHub/Table-10-Project/fantasy_items.json')
-weapons = items['weapons']
-armor = items['armor']
-consumables = items['consumables']
-bags = items['bags']
+        self.contents=sorted(self.contents,key=lambda bag: bag['name'])
