@@ -28,7 +28,7 @@ class Map:
 
         with open ("rooms.json", "r", encoding= "utf-8") as f:
             map = json.load(f)
-        play = True
+        
 
         #picks a random map
         randomMap = random.choice(list(map))
@@ -44,8 +44,7 @@ class Map:
         #currentRoom = playRoom["4"]
         current = currentRoom["current"]
         print(self.status(current))
-        userInput = input(self.prompt)
-        userInput.lower()
+        userInput = input(self.prompt).lower()
         
         if userInput not in currentRoom:
             userInput = self.playPrompt("nesw")
@@ -61,16 +60,17 @@ class Map:
             previous = currentRoom["current"]
 
             if userInput not in self.neswCheck:
-                 userInput = self.playPrompt("nesw")
+                 userInput = self.playPrompt("nesw").lower()
+                 
                
             elif self.gameEnd != True:
                 currentRoom = playRoom[previous]
                 current = currentRoom["current"]
 
             if movement == "invalid movement" and self.gameEnd == False:
-                userInput = self.playPrompt("lol")
+                userInput = self.playPrompt("invalid")
                 while(userInput not in currentRoom and self.gameEnd != True):
-                    userInput = self.playPrompt("lol")
+                    userInput = self.playPrompt("invalid").lower()
                 if self.gameEnd != True:
                     movement = currentRoom[userInput]
 
@@ -86,8 +86,8 @@ class Map:
            
 
             print(self.status(current))
-            userInput = input(self.prompt)
-            userInput.lower()
+            userInput = input(self.prompt).lower()
+            
         
             if userInput not in currentRoom:
                  userInput = self.playPrompt("nesw")
@@ -108,13 +108,13 @@ class Map:
             if once == False:
                 print(self.neswError)
                 once = True
-            answer = input(self.playInput)
+            answer = input(self.playInput).lower()
         else:
             if once == False:
                 print(self.invalidDirection)
                 once = True
-            answer = input(self.playInput)
-        answer.lower()
+            answer = input(self.playInput).lower()
+        
         while(ansFlag == True):
             if answer == "no":
                 self.play = False 
@@ -123,18 +123,18 @@ class Map:
                 self.gameEnd = True
                 break
             elif answer == "yes":
-                na = input(self.prompt)
+                na = input(self.prompt).lower()
                 if na in self.neswCheck:
                     ansFlag = False
                     return na
                 else:
                     print("invalid answer, please try again.")
-                    answer = input(self.playInput)
-                    answer.lower()
+                    answer = input(self.playInput).lower()
+                    
             else: 
                     print("invalid answer, please try again.")
-                    answer = input(self.playInput)
-                    answer.lower()
+                    answer = input(self.playInput).lower()
+                  
                     
 
 
