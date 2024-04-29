@@ -4,15 +4,9 @@ import sys
 from argparse import ArgumentParser
 #from puzzle import puzzle as p
 """Functionality check-list for map
--building rooms
--linking/pointing to appropriate rooms
--sorting out move limitations 
--when move specified correct room is applied
 -add non square/rectangle rooms
 -add the items to each of the rooms after functionality for such has been 
 created
--add all the .upper shit to standardize the answers 
--add main function
 """
 
 class Map:
@@ -31,7 +25,6 @@ class Map:
         with open (filepath, "r", encoding= "utf-8") as f:
             map = json.load(f)
         
-
         #picks a random map
         randomMap = random.choice(list(map))
         playRoom = map[randomMap]
@@ -55,7 +48,6 @@ class Map:
             userInput = self.playPrompt("nesw")
         elif self.gameEnd != True and userInput in currentRoom:
             movement = currentRoom[userInput]
-      
 
         while(self.gameEnd != True):
             
@@ -63,8 +55,6 @@ class Map:
 
             if userInput not in self.neswCheck:
                  userInput = self.playPrompt("nesw").lower()
-                 
-               
             elif self.gameEnd != True:
                 currentRoom = playRoom[previous]
                 current = currentRoom["current"]
@@ -85,11 +75,9 @@ class Map:
             if movement != "invalid movement":
                 currentRoom = playRoom[movement]
                 current = currentRoom["current"]
-           
 
             print(self.status(current))
             userInput = input(self.prompt).lower()
-            
         
             if userInput not in currentRoom:
                  userInput = self.playPrompt("nesw")
