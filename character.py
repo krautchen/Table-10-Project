@@ -1,5 +1,5 @@
 from random import randrange
-from items import Weapon,Armor,Bag
+from items import *
 
 def d6(number):
     """Roll a six sided die

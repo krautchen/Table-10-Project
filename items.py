@@ -1,5 +1,5 @@
 import json
-from character import *
+
 def load_items(items_file):
     """_summary_
 
