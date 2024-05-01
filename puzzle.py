@@ -33,6 +33,8 @@ def puzzle():
         if len(guess) == 0:
             guess_count += 1
             print("Guess must contain at least one character.")
+        elif guess == "exit":
+            break
         else:
             if re.search(code, guess):
                 print(f"{guess} is correct!")
