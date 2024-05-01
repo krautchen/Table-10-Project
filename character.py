@@ -42,7 +42,7 @@ class CharacterCreator:
             except ValueError:
                 print("Invalid input. Please enter a number.")
     
-class Character():
+class Character:
     """A basic character tempalte
     """
     def __init__(self,
@@ -58,15 +58,20 @@ class Character():
                 armor={},
                 bag=[]
                 ):
-        """Generic character attributes
+        """Initialize a character(Char)
 
         Args:
-            name (string): Character name
-            type (string): The type of weapon
-            hits (int): Number of hits
-            weapon_damage (int): How much damage the type type of item does
-            size (int, optional): How big the bag is. Defaults to 5.
-            contents (list, optional): Stuff in the bag. Defaults to [].
+            character_type (str, optional): Char type. Defaults to 'Player'.
+            name (str, optional): Char name. Defaults to 'Gandalf'.
+            level (int, optional): Char level. Defaults to 1.
+            hp (int, optional): Char health. Defaults to 10.
+            strength (int, optional): Char strength. Defaults to 2.
+            defense (int, optional): Char defense. Defaults to 2.
+            dexterity (int, optional): Char dexterity. Defaults to 2.
+            hits (int, optional): Char number of attacks. Defaults to 1.
+            weapon (dict, optional): Char weapon object. Defaults to {}.
+            armor (dict, optional): Char armor object. Defaults to {}.
+            bag (list, optional): Char bag object. Defaults to [].
         """
         self.type=character_type
         self.name=name

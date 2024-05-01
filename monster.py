@@ -2,6 +2,14 @@ from character import *
 import json
 
 def load_monsters(file_path):
+    """Load monsters
+
+    Args:
+        file_path (str): Path to monster data file
+
+    Returns:
+        dict: a dictionary containing monsters
+    """
     monsters = {"trash":[],"boss":[]}
     with open(file_path, 'r') as file:
         monster_data = json.load(file)
@@ -24,6 +32,7 @@ def load_monsters(file_path):
     return monsters
 
 class Monster(Character):
+    
     def __init__(self,
                 character_type='Monster',
                 name='Groht',
@@ -37,6 +46,22 @@ class Monster(Character):
                 armor={},
                 bag=[],
                 exp_val=1):
+        """Initializes monster object
+
+        Args:
+            character_type (str, optional): Type. Defaults to 'Monster'.
+            name (str, optional): Monster name. Defaults to 'Groht'.
+            level (int, optional): Monster level. Defaults to 1.
+            hp (int, optional): Monster health. Defaults to 1.
+            strength (int, optional): Monster strength. Defaults to 1.
+            defense (int, optional): Monster defense. Defaults to 1.
+            dexterity (int, optional): Monster dexterity. Defaults to 1.
+            hits (int, optional): Monster number of attacks. Defaults to 1.
+            weapon (dict, optional): Monster weapon object. Defaults to {}.
+            armor (dict, optional): Monster armor object. Defaults to {}.
+            bag (list, optional): Monster bag. Defaults to [].
+            exp_val (int, optional): Monster experience value. Defaults to 1.
+        """
         super().__init__(character_type,name,level,hp,strength,defense,dexterity,
                          hits,weapon,armor,bag)
         self.exp_val=exp_val
@@ -44,7 +69,11 @@ class Monster(Character):
         
         
     def __repr__(self):
-        # Create a detailed representation of the Monster
+        """Formal representation of the monster
+
+        Returns:
+            str: Monster attributes
+        """
         return (
             f"Monster(name={self.name}, "
             f"type={self.type}, "
