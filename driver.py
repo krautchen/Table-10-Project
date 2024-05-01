@@ -2,7 +2,8 @@ import json
 import random
 import sys
 from argparse import ArgumentParser
-#from puzzle import puzzle as p
+from puzzle import puzzle as p
+#answer is L3ST TR10S4R1
 """Functionality check-list for map
 -add non square/rectangle rooms
 -add the items to each of the rooms after functionality for such has been 
@@ -18,19 +19,22 @@ class Map:
         self.neswCheck = ["n", "s", "e", "w"]
         self.playInput = "would you like to continue? "
         self.gameEnd = False 
-        #item and puzzle random and flag to say they already did it
+        self.puzzleEnd = "not complete"
+        #load items and create objects for each of the item types and rand 
+        #between zero and two to see what those types are made
+        #look at the example file n shit for the one example
 
-    def mapDriver(self, filepath):
-
+    def mapDriver(self, filepath): #add back the filepath arguement
         with open (filepath, "r", encoding= "utf-8") as f:
             map = json.load(f)
         
-        #picks a random map
+       #picks a random map
         randomMap = random.choice(list(map))
         playRoom = map[randomMap]
         #picks random room in map
         randomRoom= str(random.randint(1, len(map[randomMap])))
-
+        #random chance for the puzzle to appear
+    
         #game start
         currentRoom = playRoom[randomRoom]
 
@@ -50,7 +54,7 @@ class Map:
             movement = currentRoom[userInput]
 
         while(self.gameEnd != True):
-            
+                    
             previous = currentRoom["current"]
 
             if userInput not in self.neswCheck:
@@ -58,12 +62,16 @@ class Map:
             elif self.gameEnd != True:
                 currentRoom = playRoom[previous]
                 current = currentRoom["current"]
-
+                
+            prevInput = userInput
+            
             if movement == "invalid movement" and self.gameEnd == False:
                 userInput = self.playPrompt("invalid")
-                while(userInput not in currentRoom and self.gameEnd != True):
+                while(userInput not in currentRoom and self.gameEnd != True or 
+                      prevInput == userInput):
+                    prevInput = userInput
                     userInput = self.playPrompt("invalid").lower()
-                if self.gameEnd != True:
+                if self.gameEnd != True and prevInput != userInput:
                     movement = currentRoom[userInput]
 
             if self.gameEnd == True:
@@ -76,6 +84,15 @@ class Map:
                 currentRoom = playRoom[movement]
                 current = currentRoom["current"]
 
+            puzzleChance = random.randint(1, 10)
+            willGetPuzzle = random.randint(1,3) 
+            #ask for attribute that returns if the game has been completed
+            # so i can tell my method that the puzzle has been completed
+            
+            if self.puzzleEnd != "complete":
+                if willGetPuzzle == puzzleChance:
+                    self.puzzleEnd = p()  
+                    
             print(self.status(current))
             userInput = input(self.prompt).lower()
         
@@ -83,7 +100,6 @@ class Map:
                  userInput = self.playPrompt("nesw")
             if self.gameEnd != True:
                 movement = currentRoom[userInput]
-           
         
     #def __repr__(self) -> str:
         #return self.choice
@@ -141,5 +157,5 @@ if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
     main(args.filepath)
 
-#c = Map("3x3")
-#c.mapDriver()
+c = Map()
+c.mapDriver()
