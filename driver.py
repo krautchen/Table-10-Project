@@ -20,12 +20,14 @@ class Map:
         self.playInput = "would you like to continue? "
         self.gameEnd = False 
         self.puzzleEnd = "not complete"
+        self.current = ""
+        
         #load items and create objects for each of the item types and rand 
         #between zero and two to see what those types are made
         #look at the example file n shit for the one example
 
-    def mapDriver(self, filepath): #add back the filepath arguement
-        with open (filepath, "r", encoding= "utf-8") as f:
+    def mapDriver(self): #add back the filepath arguement
+        with open ("rooms.json", "r", encoding= "utf-8") as f:
             map = json.load(f)
         
        #picks a random map
@@ -41,8 +43,8 @@ class Map:
         #below for testing
         #playRoom = map["1x5"]
         #currentRoom = playRoom["4"]
-        current = currentRoom["current"]
-        print(self.status(current))
+        self.current = currentRoom["current"]
+        print(self.status(self.current))
         userInput = input(self.prompt).lower()
         
         if userInput not in currentRoom:
@@ -54,14 +56,14 @@ class Map:
             movement = currentRoom[userInput]
 
         while(self.gameEnd != True):
-                    
+            
             previous = currentRoom["current"]
 
             if userInput not in self.neswCheck:
                  userInput = self.playPrompt("nesw").lower()
             elif self.gameEnd != True:
                 currentRoom = playRoom[previous]
-                current = currentRoom["current"]
+                self.current = currentRoom["current"]
                 
             prevInput = userInput
             
@@ -78,22 +80,20 @@ class Map:
                         break
             else:
                 currentRoom = playRoom[previous]
-                current = currentRoom["current"]
+                self.current = currentRoom["current"]
 
             if movement != "invalid movement":
                 currentRoom = playRoom[movement]
-                current = currentRoom["current"]
+                self.current = currentRoom["current"]
 
             puzzleChance = random.randint(1, 10)
             willGetPuzzle = random.randint(1,3) 
-            #ask for attribute that returns if the game has been completed
-            # so i can tell my method that the puzzle has been completed
             
             if self.puzzleEnd != "complete":
                 if willGetPuzzle == puzzleChance:
                     self.puzzleEnd = p()  
                     
-            print(self.status(current))
+            print(self.status(self.current))
             userInput = input(self.prompt).lower()
         
             if userInput not in currentRoom:
@@ -139,23 +139,6 @@ class Map:
             else: 
                     print("invalid answer, please try again.")
                     answer = input(self.playInput).lower()
-                  
-def main(filepath):
-    m = Map()
-    userInput = input("would you like to play? ").lower()
-    if userInput == "yes":
-        m.mapDriver(filepath)
-    else:
-        print("goodbye!")
-        
-def parse_args(arglist):
-    parser = ArgumentParser()
-    parser.add_argument("filepath", help = "path to the map(s)")
-    return parser.parse_args(arglist)
-
-if __name__ == "__main__":  
-    args = parse_args(sys.argv[1:])
-    main(args.filepath)
 
 c = Map()
 c.mapDriver()
