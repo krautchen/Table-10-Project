@@ -20,29 +20,36 @@ class Map:
         self.playInput = "would you like to continue? "
         self.gameEnd = False 
         self.puzzleEnd = "not complete"
+        self.current = None
         #load items and create objects for each of the item types and rand 
         #between zero and two to see what those types are made
         #look at the example file n shit for the one example
-
+    def load_items(self, filepath):
+        with open(filepath, "r", encoding="utf-8") as file:
+            items = json.load(file)
+        return items
+    def load_monsters(self, filepath):
+        with open(filepath, "r", encoding="utf-8") as file:
+            monsters = json.load(file)
+        return monsters
     def mapDriver(self, filepath): #add back the filepath arguement
         with open (filepath, "r", encoding= "utf-8") as f:
             map = json.load(f)
         
        #picks a random map
-        randomMap = random.choice(list(map))
-        playRoom = map[randomMap]
+        self.randomMap = random.choice(list(map))
+        playRoom = map[self.randomMap]
         #picks random room in map
-        randomRoom= str(random.randint(1, len(map[randomMap])))
+        randomRoom= str(random.randint(1, len(map[self.randomMap])))
         #random chance for the puzzle to appear
-    
         #game start
         currentRoom = playRoom[randomRoom]
 
         #below for testing
         #playRoom = map["1x5"]
         #currentRoom = playRoom["4"]
-        current = currentRoom["current"]
-        print(self.status(current))
+        self.current = currentRoom["current"]
+        print(self.status(self.current))
         userInput = input(self.prompt).lower()
         
         if userInput not in currentRoom:
@@ -61,7 +68,7 @@ class Map:
                  userInput = self.playPrompt("nesw").lower()
             elif self.gameEnd != True:
                 currentRoom = playRoom[previous]
-                current = currentRoom["current"]
+                self.current = currentRoom["current"]
                 
             prevInput = userInput
             
@@ -78,11 +85,11 @@ class Map:
                         break
             else:
                 currentRoom = playRoom[previous]
-                current = currentRoom["current"]
+                self.current = currentRoom["current"]
 
             if movement != "invalid movement":
                 currentRoom = playRoom[movement]
-                current = currentRoom["current"]
+                self.current = currentRoom["current"]
 
             puzzleChance = random.randint(1, 10)
             willGetPuzzle = random.randint(1,3) 
@@ -93,7 +100,7 @@ class Map:
                 if willGetPuzzle == puzzleChance:
                     self.puzzleEnd = p()  
                     
-            print(self.status(current))
+            print(self.status(self.current))
             userInput = input(self.prompt).lower()
         
             if userInput not in currentRoom:
@@ -156,6 +163,3 @@ def parse_args(arglist):
 if __name__ == "__main__":  
     args = parse_args(sys.argv[1:])
     main(args.filepath)
-
-c = Map()
-c.mapDriver()

@@ -1,9 +1,9 @@
 {
     "3x3":{
         "1": {"n": "invalid movement", "e": "2", "s": "4",
-         "w": "invalid movement", "current": "1"},
+         "w": "invalid movement", "current": "1", "items": [{"name":"Helmet"},{"name":"Light Healing Potion"}], "monsters": {"name":"Goblin"}},
         "2": {"n": "invalid movement", "e": "3", "s": "5", 
-        "w": "1", "current": "2"},
+        "w": "1", "current": "2", "monsters": [{"name":"Goblin"}, {"name":"Goblin"}]},
         "3": {"n": "invalid movement", "e": "invalid movement", "s": "6", 
         "w": "2", "current": "3"},
         "4":{"n": "1", "e": "5", "s": "6", 
