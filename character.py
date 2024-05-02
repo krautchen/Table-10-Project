@@ -23,12 +23,14 @@ class CharacterCreator:
   
     def create_character(self):
         name = input("Enter your character's name: ")
-        strength = self.get_attribute("strength")
-        defense = self.get_attribute("defense")
-        dexterity = self.get_attribute("dexterity")
+        strength = self.assign_stat("strength")
+        defense = self.assign_stat("defense")
+        dexterity = self.assign_stat("dexterity")
 
         self.character = Character(name=name, strength=strength, defense=defense, dexterity=dexterity)
-        print(f"\nCharacter '{self.character.name}' created with the following attributes:")
+        print(f"\nCharacter '{self.character.name}' created with the following attributes: \n{self.character.strength} strength \n{self.character.defense} defense \n{self.character.dexterity} dexterity")
+        print(f"\nCharacter '{self.character.name}' has {self.character.weapon.name} weapon, {self.character.armor.name} armor, and {self.character.bag.name} bag.")
+        print("Loading world...")
         self.character.status()
 
     def assign_stat(self, attribute_name):
@@ -94,6 +96,7 @@ class Character():
             
             if total_damage > 0:
                 target.take_damage(total_damage)
+                # should print target hp after this print statement
                 return print(f"{self.name} attacks {target.name} for {total_damage} damage.")
             
             else:
@@ -112,7 +115,7 @@ class Character():
         print(f"""{self.name} has {self.hp} HP""")
         
     def level_up(self,stat):
-        raise NotImplemented
+        raise NotImplementedError()
     
     def equip_weapon(self,weapon):
         self.weapon=weapon
