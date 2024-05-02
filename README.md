@@ -6,7 +6,7 @@
 - Contains the class for creating a Character object.
 
 #### `driver.py`
-- 
+- Selects which map and handles navigating the map.
 
 #### `items.py`
 - Contains the class for creating Item objects, including
@@ -29,7 +29,8 @@ inherits most of its attributes from the Character object.
 - 
 
 #### `rooms.json`
-- 
+- A dictionary with all of the rooms and valid carindal directions for movement
+- Each room may or may not also have items
 
 <br/>
 <br/>
