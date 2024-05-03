@@ -1,13 +1,13 @@
 {
     "3x3":{
         "1": {"n": "invalid movement", "e": "2", "s": "4",
-         "w": "invalid movement", "current": "1", "items":[{"weapons": "Fist", 
-         "armor": "Helmet"}]},
+         "w": "invalid movement", "current": "1", "items":{"weapons": "Fist", 
+         "armor": "Helmet"}},
         "2": {"n": "invalid movement", "e": "3", "s": "5", 
-        "w": "1", "current": "2", "monsters": [{"name":"Goblin"}, {"name":"Goblin"}]},
+        "w": "1", "current": "2", "monsters": {"trash":"Goblin"}},
         "3": {"n": "invalid movement", "e": "invalid movement", "s": "6", 
-        "w": "2", "current": "3", "items":[{"bags": "Sack"}],
-         "monsters":[{"boss": "Balrog", "trash": "Goblin"}]},
+        "w": "2", "current": "3", "items":{"bags": "Sack"},
+         "monsters":{"boss": "Balrog", "trash": "Goblin"}},
         "4":{"n": "1", "e": "5", "s": "6", 
         "w": "invalid movement", "current": "4"},
         "5": {"n": "2", "e": "6", "s": "8", "w": "4",  "current": "5"},
@@ -15,40 +15,26 @@
         "s": "9", "w": "5",  "current": "6"},
         "7":{"n": "4", "e": "8", "s": "invalid movement", 
         "w": "invalid movement", "current": "7", 
-        "items":[{"consumables": "Strong Healing Potion",
-         "armor":"Chainmail Shirt"}]},
+        "items":{"consumables": "Strong Healing Potion", "armor":"Chainmail Shirt"}},
         "8":{"n": "5", "e": "9", "s": "invalid movement", 
         "w": "7",  "current": "8"},
         "9":{"n": "6", "e": "invalid movement", 
         "s": "invalid movement", "w": "8",  "current": "9", 
-        "items":[{"bags":"Rucksack", "armor": "Studded Leather"}]}
+        "items":{"bags":"Rucksack","armor": "Studded Leather"}}
     },
     "1x5":{
         "1": {"n": "invalid movement", "e": "invalid movement", "s": "2",
         "w": "invalid movement", "current": "1",
-         "items": [{"weapons": "Sword", "bags":"Luggae"}], 
-         "monsters":[{"boss": "Balrog"}]},
+         "items": {"weapons": "Sword", "bags":"Luggage"}, 
+         "monsters":{"boss": "Balrog"}},
         "2": {"n": "1", "e": "invalid movement", "s": "3",
         "w": "invalid movement", "current": "2",
-         "items":[{"consumables": "Light Healing Potion"}]},
+         "items":{"consumables": "Light Healing Potion"}},
         "3": {"n": "2", "e": "invalid movement", 
         "s": "4", "w": "invalid movement", "current": "3",
-         "items":[{"weapons": "Club"}], "monsters":[{"boss": "Balrog"}]},
+         "items":{"weapons": "Club"}, "monsters":{"boss": "Balrog"}},
         "4":{"n": "3", "e": "invalid movement", 
         "s": "invalid movement", "w": "invalid movement", "current": "4", 
-        "items": [{"consumables": "Medium Healing Potion"}]}
+        "items": {"consumables": "Medium Healing Potion"}}
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

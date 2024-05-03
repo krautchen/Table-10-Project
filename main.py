@@ -16,8 +16,6 @@ class Game:
     def __init__(self, genre):
         self.genre = genre
         self.load_genre()
-        self.items = {}
-        self.monsters = {}
         
     def load_genre(self):
         fantasy = r"""^fantasy$"""
@@ -36,30 +34,16 @@ class Game:
     def play(self):
         new_char = CharacterCreator()
         new_char.create_character()
+        new_map = Map()
         
         while new_char.character.hp > 0:
-            new_map = Map()
-            new_map.mapDriver("rooms.json")
-            # mapDriver holds logic for stating whether a room has items and/or monsters
-            if new_map.randomMap[int(new_map.current)]["monsters"] is not None:
-                if new_map.randomMap[int(new_map.current)]["items"] is not None:
-                    turn = "character"
-                    print("Player must defeat all monsters before collecting items. Combat Start!")
-                    for type, monster in self.monsters.items():
-                        while monster.hp > 0:
-                            if turn == "character":
-                                new_char.character.attack(monster)
-                                turn = "monster"
-                            else:
-                                monster.attack(new_char.character)
-                        print("You defeated it!")
-                else:
-                    print("Defeat all monsters to progress to next room!")
+            choice = new_map.room_description(new_char.character.name)
+            if choice == "fight monsters":
+                new_map.has_monsters(new_char.character)
+            elif choice == "collect items":
+                new_map.has_items(new_char.character)
             else:
-                if new_map.randomMap[int(new_map.current)]["items"] is not None:
-                    print("Collect all items to progress to next room!")
-                else:
-                    print("Progress to next room!")
+                new_map.room_transition()
 
 def main(genre):
     game = Game(genre)
