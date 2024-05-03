@@ -2,9 +2,9 @@ import json
 import random
 import sys
 from argparse import ArgumentParser
-from puzzle import puzzle as p
-from items import *
-from monster import load_monsters
+from puzzleCopy import puzzle as p
+from itemsCopy import *
+from monsterCopy import load_monsters
 #answer is L3ST TR10S4R1
 """Functionality check-list for map
 -add non square/rectangle rooms
@@ -51,10 +51,10 @@ class Map:
         self.puzzleEnd = "not complete"
         self.itemCheck = False
         self.monsterCheck = False
-        self.items = load_items('fantasy_items.json')
-        self.monsters = load_monsters('fantasy_monsters.json')
+        #self.items = load_items('fantasy_items.json')
+        #self.monsters = load_monsters('fantasy_monsters.json')
         
-        with open ("rooms.json", "r", encoding= "utf-8") as f:
+        with open ("roomsCopy.json", "r", encoding= "utf-8") as f:
             map = json.load(f)
         
         #picks a random map
@@ -97,25 +97,33 @@ class Map:
         
         choice = input(self.roomPrompt)
         if choice not in ["fight monsters", "collect items", "move to next room"]:
-            raise ValueError("Choose between the three prompts provided.")
+            print("Choose between the three prompts provided.")
         return choice
+    
     def room_transition(self):
         """Handles player movement between rooms.
         
         Args:
             userInput (str): the direction the player wants to move in
         """
+        
+        print(self.room_description("hero"))
         try:
-            userInput = input(self.prompt).lower()
+            userInput = input(self.directionPrompt).lower()
             if userInput in self.neswCheck and userInput in self.currentRoom:
                 if self.currentRoom[userInput] == "invalid movement":
-                    raise ValueError(self.neswError)
+                    raise print(self.neswError)
                 else:
+                    print(self.room_description("hero"))
                     prevRoom = self.currentRoom["current"]
                     current = self.playRoom[self.currentRoom[userInput]]
                     self.currentRoom = current
-        except ValueError:
-            raise ValueError(self.invalidDirection)
+        finally:
+            userInput = input(self.directionPrompt).lower()
+            while(userInput not in self.neswCheck):
+                print(self.neswError)
+                userInput = input(self.directionPrompt).lower()
+        print(self.room_description("hero"))
     
     def has_puzzle(self):
         """Checks if the incoming room has a puzzle associated with it and if it does, executes the imported puzzle function.
@@ -158,6 +166,20 @@ class Map:
                 while char.hp > 0:
                     char.attack(monster)
                     print("Monster attacked.")
+
+    def status(self, cr):
+         """
+         Displays what room the user is currently in
+
+         Args:
+         cr: string
+             The current room the user is
+
+         Returns:
+             returns the in a string explaining current positioning of the user    
+         """
+         return f"you are currently in room {cr}. {cr} has "
+
     # def mapDriver(self): 
     #     """
     #     The main driver for the users movement in the map
@@ -303,5 +325,3 @@ class Map:
     #         else: 
     #                 print("invalid answer, please try again.")
     #                 answer = input(self.playInput).lower()
-
-
