@@ -52,6 +52,7 @@ class Map:
         self.itemCheck = False
         self.monsterCheck = False
         self.name = ""
+        self.first = False
         self.items = load_items('fantasy_items.json')
         self.monsters = load_monsters('fantasy_monsters.json')
         
@@ -257,6 +258,7 @@ class Map:
     #              userInput = self.playPrompt("nesw")
     #         if self.gameEnd != True:
     #             movement = self.currentRoom[userInput]
+    
     # def status(self, cr):
     #     """
     #     Displays what room the user is currently in
@@ -269,6 +271,7 @@ class Map:
     #         returns the in a string explaining current positioning of the user    
     #     """
     #     return f"you are currently in room {cr}. {cr} has "
+        
     # def playPrompt(self, errorChoice):
     #     """
     #     Handles errors for movement and invalid inputs.
