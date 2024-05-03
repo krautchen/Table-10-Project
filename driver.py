@@ -52,6 +52,7 @@ class Map:
         self.itemCheck = False
         self.monsterCheck = False
         self.name = ""
+        self.first = False
         self.items = load_items('fantasy_items.json')
         self.monsters = load_monsters('fantasy_monsters.json')
         
@@ -115,30 +116,31 @@ class Map:
         Args:
             userInput (str): the direction the player wants to move in
         """
-        
-        print(self.room_description(self.name))
-        if self.gameEnd == True:
-            return print("game over.")
-        try:
-            userInput = input(self.directionPrompt).lower()
-            if userInput in self.neswCheck and userInput in self.currentRoom:
-                if self.currentRoom[userInput] == "invalid movement":
-                    print(self.neswError)
+        while(self.gameEnd != True):
+            if self.first == False:
+                r = self.room_description(self.name)
+                if self.gameEnd == True:
+                    return print("game over.")
+                self.first = True
+            try:
+                userInput = input(self.directionPrompt).lower()
+                if userInput in self.neswCheck and userInput in self.currentRoom:
+                    while self.currentRoom[userInput] == "invalid movement":
+                        print(self.invalidDirection)
+                        userInput = input(self.directionPrompt).lower()
                 else:
-                    print(self.room_description(self.name))
+                    r = self.room_description(self.name)
                     if self.gameEnd == True:
                         return print("game over.")
-                    prevRoom = self.currentRoom["current"]
-                    current = self.playRoom[self.currentRoom[userInput]]
-                    self.currentRoom = current
-        finally:
-            userInput = input(self.directionPrompt).lower()
-            while(userInput not in self.neswCheck):
-                print(self.neswError)
-                userInput = input(self.directionPrompt).lower()
-        print(self.room_description(self.name))
-        if self.gameEnd == True:
-            return print("game over.")
+                    self.current = self.playRoom[self.currentRoom[userInput]]
+                    self.currentRoom = self.current
+            finally:
+                self.currentRoom = self.playRoom[self.currentRoom[userInput]]
+            r = self.room_description(self.name)
+            if self.gameEnd == True:
+                return print("game over.")
+        return r
+
     
     def has_puzzle(self):
         """Checks if the incoming room has a puzzle associated with it and if it does, executes the imported puzzle function.
@@ -340,6 +342,3 @@ class Map:
     #         else: 
     #                 print("invalid answer, please try again.")
     #                 answer = input(self.playInput).lower()
-
-c = Map()
-c.room_transition()
