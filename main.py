@@ -43,7 +43,8 @@ class Game:
             elif choice == "collect items":
                 new_map.has_items(new_char.character)
             else:
-                new_map.room_transition()
+                userInput = input(new_map.directionPrompt).lower()
+                new_map.room_transition(userInput)
 
 def main(genre):
     game = Game(genre)
