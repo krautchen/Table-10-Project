@@ -42,7 +42,7 @@ class Map:
             Initalizes all the values
         """
         self.directionPrompt = "Which direction would you like to go? "
-        self.roomPrompt = "What do you want to do? Type (fight monsters), (collect items), or (move to next room). Or type quit to quit "
+        self.roomPrompt = "What do you want to do? Type (fight monsters), (collect items), or (move to next room). Or type quit to quit: "
         self.invalidDirection = "invalid choice, please choose another directon"
         self.neswError = "please choose a movement of nesw" 
         self.neswCheck = ["n", "s", "e", "w"]
@@ -74,7 +74,6 @@ class Map:
         Side effects:
             prints the description of the current room
         """
-        self.name = name
         if "monsters" in self.currentRoom or "items" in self.currentRoom:
             if "items" not in self.currentRoom:
                 print(f"""Room description:\n
@@ -99,14 +98,11 @@ class Map:
         
         choice = input(self.roomPrompt).lower()
         if choice == "quit":
-                self.gameEnd = True
-                return "goodbye!"
+            self.gameEnd = True
         while choice not in ["fight monsters", "collect items", "move to next room", "quit"]:
-            print("Choose between the three prompts provided. Or type quit to quit")
-            choice = input(self.roomPrompt)
+            print("Choose between the three prompts provided. Or type quit to quit: ")
             if choice == "quit":
                 self.gameEnd = True
-                return "goodbye!"
         return choice
     
     def room_transition(self):
@@ -115,30 +111,14 @@ class Map:
         Args:
             userInput (str): the direction the player wants to move in
         """
-        
-        print(self.room_description(self.name))
-        if self.gameEnd == True:
-            return print("game over.")
-        try:
-            userInput = input(self.directionPrompt).lower()
-            if userInput in self.neswCheck and userInput in self.currentRoom:
-                if self.currentRoom[userInput] == "invalid movement":
-                    print(self.neswError)
-                else:
-                    print(self.room_description(self.name))
-                    if self.gameEnd == True:
-                        return print("game over.")
-                    prevRoom = self.currentRoom["current"]
-                    current = self.playRoom[self.currentRoom[userInput]]
-                    self.currentRoom = current
-        finally:
-            userInput = input(self.directionPrompt).lower()
-            while(userInput not in self.neswCheck):
+        userInput = input(self.directionPrompt).lower()
+        if userInput in self.neswCheck and userInput in self.currentRoom:
+            if self.currentRoom[userInput] == "invalid movement":
                 print(self.neswError)
-                userInput = input(self.directionPrompt).lower()
-        print(self.room_description(self.name))
-        if self.gameEnd == True:
-            return print("game over.")
+            else:
+                prevRoom = self.currentRoom["current"]
+                current = self.playRoom[self.currentRoom[userInput]]
+                self.currentRoom = current
     
     def has_puzzle(self):
         """Checks if the incoming room has a puzzle associated with it and if it does, executes the imported puzzle function.
@@ -157,12 +137,14 @@ class Map:
         # category is the type of item and objects is the list of item objects
         # this loop should return the dictionary of self.items only if the category is in self.currentRoom["items"]
         room_objects = {category: objects for category, objects in self.items.items() if category in self.currentRoom["items"]}
-        for category in room_objects:
-            for item in self.items[category]:
+        for category, objects in room_objects.items():
+            room_items = [object for object in objects if object.name in self.currentRoom["items"][category]]
+            for item in room_items:
                 char.bag.store(item)
                 char.bag.organize()
                 print(f"{item.name} has been added to your inventory.")
                 # after this, it should remove the item from self.currentRoom["items"]
+            self.currentRoom["items"].pop(category)
             
     def has_monsters(self, char):
         """Checks if the current room has monsters, and if it does, engage combat sequence.
@@ -171,19 +153,20 @@ class Map:
             self.monsterCheck = True
             if "trash" in self.currentRoom["monsters"]:
                 monster = self.monsters["trash"][0]
-                print(monster)
+                print(f"{monster.name} encountered!\n")
                 while monster.hp > 0:
                     char.attack(monster)
-                    print("Monster attacked.") 
-                print("monster defeated.")       
+                    print("Monster attacked.\n")
+                print("Monster defeated! \n")     
+                self.currentRoom["monsters"].pop("trash")
             if "boss" in self.currentRoom["monsters"]:
                 monster = self.monsters["boss"][0]
-                print(monster)
+                print(f"{monster.name} encountered!\n")
                 while monster.hp > 0:
                     char.attack(monster)
-                    print("Monster attacked.")
-                print("monster defeated")
-                self.currentRoom["monsters"].remove(monster)
+                    print("Monster attacked.\n")
+                print("Monster defeated! \n")
+                self.currentRoom["monsters"].pop("boss")
                     
     # def mapDriver(self): 
     #     """
@@ -328,6 +311,3 @@ class Map:
     #         else: 
     #                 print("invalid answer, please try again.")
     #                 answer = input(self.playInput).lower()
-
-c = Map()
-c.room_transition()

@@ -35,16 +35,18 @@ class Game:
         new_char = CharacterCreator()
         new_char.create_character()
         new_map = Map()
-        
-        while new_char.character.hp > 0:
-            choice = new_map.room_description(new_char.character.name)
+        while new_map.gameEnd != True:
+            if new_char.character is not None:
+                choice = new_map.room_description(new_char.character.name)
             if choice == "fight monsters":
                 new_map.has_monsters(new_char.character)
             elif choice == "collect items":
                 new_map.has_items(new_char.character)
+            elif choice == "move to next room":
+                new_map.room_transition()
             else:
-                userInput = input(new_map.directionPrompt).lower()
-                new_map.room_transition(userInput)
+                print("Game over.")
+                new_map.gameEnd = True
 
 def main(genre):
     game = Game(genre)
