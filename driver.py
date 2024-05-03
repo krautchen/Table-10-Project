@@ -2,9 +2,9 @@ import json
 import random
 import sys
 from argparse import ArgumentParser
-from puzzleCopy import puzzle as p
-from itemsCopy import *
-from monsterCopy import load_monsters
+from puzzle import puzzle as p
+from items import *
+from monster import load_monsters
 #answer is L3ST TR10S4R1
 """Functionality check-list for map
 -add non square/rectangle rooms
