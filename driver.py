@@ -42,7 +42,7 @@ class Map:
             Initalizes all the values
         """
         self.directionPrompt = "Which direction would you like to go? "
-        self.roomPrompt = "What do you want to do? Type (fight monsters), (collect items), or (move to next room). "
+        self.roomPrompt = "What do you want to do? Type (fight monsters), (collect items), or (move to next room). Or type quit to quit "
         self.invalidDirection = "invalid choice, please choose another directon"
         self.neswError = "please choose a movement of nesw" 
         self.neswCheck = ["n", "s", "e", "w"]
@@ -51,6 +51,7 @@ class Map:
         self.puzzleEnd = "not complete"
         self.itemCheck = False
         self.monsterCheck = False
+        self.name = ""
         self.items = load_items('fantasy_items.json')
         self.monsters = load_monsters('fantasy_monsters.json')
         
@@ -73,6 +74,7 @@ class Map:
         Side effects:
             prints the description of the current room
         """
+        self.name = name
         if "monsters" in self.currentRoom or "items" in self.currentRoom:
             if "items" not in self.currentRoom:
                 print(f"""Room description:\n
@@ -95,36 +97,48 @@ class Map:
                 This room has no monsters or items.
                 """)
         
-        choice = input(self.roomPrompt)
-        if choice not in ["fight monsters", "collect items", "move to next room"]:
-            raise ValueError("Choose between the three prompts provided.")
+        choice = input(self.roomPrompt).lower()
+        if choice == "quit":
+                self.gameEnd = True
+                return "goodbye!"
+        while choice not in ["fight monsters", "collect items", "move to next room", "quit"]:
+            print("Choose between the three prompts provided. Or type quit to quit")
+            choice = input(self.roomPrompt)
+            if choice == "quit":
+                self.gameEnd = True
+                return "goodbye!"
         return choice
-    def status(self, cr):
-        """
-        Displays what room the user is currently in
-
-        Args:
-        cr: string
-            The current room the user is
-
-        Returns:
-            returns the in a string explaining current positioning of the user    
-        """
-        return f"you are currently in room {cr}."
-    def room_transition(self, userInput):
+    
+    def room_transition(self):
         """Handles player movement between rooms.
         
         Args:
             userInput (str): the direction the player wants to move in
         """
-        if userInput in self.neswCheck and userInput in self.currentRoom:
-            if self.currentRoom[userInput] == "invalid movement":
+        
+        print(self.room_description(self.name))
+        if self.gameEnd == True:
+            return print("game over.")
+        try:
+            userInput = input(self.directionPrompt).lower()
+            if userInput in self.neswCheck and userInput in self.currentRoom:
+                if self.currentRoom[userInput] == "invalid movement":
+                    print(self.neswError)
+                else:
+                    print(self.room_description(self.name))
+                    if self.gameEnd == True:
+                        return print("game over.")
+                    prevRoom = self.currentRoom["current"]
+                    current = self.playRoom[self.currentRoom[userInput]]
+                    self.currentRoom = current
+        finally:
+            userInput = input(self.directionPrompt).lower()
+            while(userInput not in self.neswCheck):
                 print(self.neswError)
-            else:
-                # 
-                prevRoom = self.currentRoom["current"]
-                current = self.playRoom[self.currentRoom[userInput]]
-                self.currentRoom = current
+                userInput = input(self.directionPrompt).lower()
+        print(self.room_description(self.name))
+        if self.gameEnd == True:
+            return print("game over.")
     
     def has_puzzle(self):
         """Checks if the incoming room has a puzzle associated with it and if it does, executes the imported puzzle function.
@@ -260,7 +274,18 @@ class Map:
     #              userInput = self.playPrompt("nesw")
     #         if self.gameEnd != True:
     #             movement = self.currentRoom[userInput]
-        
+    # def status(self, cr):
+    #     """
+    #     Displays what room the user is currently in
+
+    #     Args:
+    #     cr: string
+    #         The current room the user is
+
+    #     Returns:
+    #         returns the in a string explaining current positioning of the user    
+    #     """
+    #     return f"you are currently in room {cr}. {cr} has "
     # def playPrompt(self, errorChoice):
     #     """
     #     Handles errors for movement and invalid inputs.
@@ -304,4 +329,5 @@ class Map:
     #                 print("invalid answer, please try again.")
     #                 answer = input(self.playInput).lower()
 
-
+c = Map()
+c.room_transition()
