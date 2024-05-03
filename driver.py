@@ -52,10 +52,10 @@ class Map:
         self.itemCheck = False
         self.monsterCheck = False
         self.name = ""
-        #self.items = load_items('fantasy_items.json')
-        #self.monsters = load_monsters('fantasy_monsters.json')
+        self.items = load_items('fantasy_items.json')
+        self.monsters = load_monsters('fantasy_monsters.json')
         
-        with open ("roomsCopy.json", "r", encoding= "utf-8") as f:
+        with open ("rooms.json", "r", encoding= "utf-8") as f:
             map = json.load(f)
         
         #picks a random map
