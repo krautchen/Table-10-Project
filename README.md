@@ -54,7 +54,7 @@ inherits most of its attributes from the Character object.
 |   puzzle  |   Michelle Akem   |   json.load()   |
 |   puzzle  |   Michelle Akem   |   Regex expressions   |
 |   bag.organize()  |   Noah Hibbler   |   Lambda key function   |
-|   Character class object attributes have Weapon, Armour, and Bag class objects; Weapon, Armour, and Bag class objects inherit name attribute from Item class  |   Noah Hibbler   |   Composition of two classes   |
+|   Character class \__init__ |   Noah Hibbler   |   Composition of two classes   |
 
 <br/>
 <br/>
