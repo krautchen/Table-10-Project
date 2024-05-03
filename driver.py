@@ -46,7 +46,7 @@ class Map:
         self.invalidDirection = "invalid choice, please choose another directon"
         self.neswError = "please choose a movement of nesw" 
         self.neswCheck = ["n", "s", "e", "w"]
-        self.playInput = "would you like to continue? "
+        self.playInput = "would you like to continue? (yes/no)"
         self.gameEnd = False 
         self.puzzleEnd = "not complete"
         self.itemCheck = False
@@ -116,6 +116,13 @@ class Map:
         if userInput in self.neswCheck and userInput in self.currentRoom:
             if self.currentRoom[userInput] == "invalid movement":
                 print(self.neswError)
+                userInput = input(self.directionPrompt).lower()
+                if self.currentRoom[userInput] == "invalid movement":
+                    continueInput = input(self.playInput)
+                    if continueInput == "yes":
+                        self.room_transition()
+                    else:
+                        self.gameEnd = True
             else:
                 prevRoom = self.currentRoom["current"]
                 current = self.playRoom[self.currentRoom[userInput]]
