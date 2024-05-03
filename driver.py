@@ -101,7 +101,7 @@ class Map:
         if choice == "quit":
             self.gameEnd = True
         while choice not in ["fight monsters", "collect items", "move to next room", "quit"]:
-            print("Choose between the three prompts provided. Or type quit to quit: ")
+            choice = input(self.roomPrompt).lower()
             if choice == "quit":
                 self.gameEnd = True
         return choice
@@ -115,7 +115,7 @@ class Map:
         userInput = input(self.directionPrompt).lower()
         if userInput in self.neswCheck and userInput in self.currentRoom:
             if self.currentRoom[userInput] == "invalid movement":
-                print(self.neswError)
+                print(self.invalidDirection)
                 userInput = input(self.directionPrompt).lower()
                 if self.currentRoom[userInput] == "invalid movement":
                     continueInput = input(self.playInput)
