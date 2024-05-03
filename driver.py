@@ -42,7 +42,7 @@ class Map:
             Initalizes all the values
         """
         self.directionPrompt = "Which direction would you like to go? "
-        self.roomPrompt = "What do you want to do? Type fight monsters, collect items, or move to next room. Or type quit to quit "
+        self.roomPrompt = "What do you want to do? Type (fight monsters), (collect items), or (move to next room). Or type quit to quit "
         self.invalidDirection = "invalid choice, please choose another directon"
         self.neswError = "please choose a movement of nesw" 
         self.neswCheck = ["n", "s", "e", "w"]
@@ -171,32 +171,22 @@ class Map:
         """
         if "monsters" in self.currentRoom:
             self.monsterCheck = True
-            if self.currentRoom["monsters"]["trash"]:
-                monster = self.monsters["trash"]
+            if "trash" in self.currentRoom["monsters"]:
+                monster = self.monsters["trash"][0]
                 print(monster)
-                while char.hp > 0:
+                while monster.hp > 0:
                     char.attack(monster)
-                    print("Monster attacked.")        
-            elif self.currentRoom["monsters"]["boss"]:
-                monster = self.monsters["boss"]
+                    print("Monster attacked.") 
+                print("monster defeated.")       
+            if "boss" in self.currentRoom["monsters"]:
+                monster = self.monsters["boss"][0]
                 print(monster)
-                while char.hp > 0:
+                while monster.hp > 0:
                     char.attack(monster)
                     print("Monster attacked.")
-
-    def status(self, cr):
-         """
-         Displays what room the user is currently in
-
-         Args:
-         cr: string
-             The current room the user is
-
-         Returns:
-             returns the in a string explaining current positioning of the user    
-         """
-         return f"you are currently in room {cr}. {cr} has "
-
+                print("monster defeated")
+                self.currentRoom["monsters"].remove(monster)
+                    
     # def mapDriver(self): 
     #     """
     #     The main driver for the users movement in the map
@@ -286,7 +276,6 @@ class Map:
     #              userInput = self.playPrompt("nesw")
     #         if self.gameEnd != True:
     #             movement = self.currentRoom[userInput]
-    
     # def status(self, cr):
     #     """
     #     Displays what room the user is currently in
@@ -299,7 +288,6 @@ class Map:
     #         returns the in a string explaining current positioning of the user    
     #     """
     #     return f"you are currently in room {cr}. {cr} has "
-        
     # def playPrompt(self, errorChoice):
     #     """
     #     Handles errors for movement and invalid inputs.
