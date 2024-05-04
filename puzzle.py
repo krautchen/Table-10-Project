@@ -38,7 +38,6 @@ def puzzle():
         else:
             if re.search(code, guess):
                 print(f"{guess} is correct!")
-                # move character into room by setting current_room attribute to next room
                 return "complete"
             else:
                 print(f"{guess} is incorrect! Please try again.")
@@ -50,6 +49,5 @@ def puzzle():
         if guess_count == 5:
             print("Sorry, you have run out of guesses.")
             return "failed"
-                # keep character in current_room, do nothing
 if __name__ == "__main__":
     puzzle()

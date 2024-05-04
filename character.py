@@ -29,9 +29,7 @@ class CharacterCreator:
 
         self.character = Character(name=name, strength=strength, defense=defense, dexterity=dexterity)
         print(f"\nCharacter '{self.character.name}' created with the following attributes: \n{self.character.strength} strength \n{self.character.defense} defense \n{self.character.dexterity} dexterity")
-        print(f"\nCharacter '{self.character.name}' has {self.character.weapon.name} weapon, {self.character.armor.name} armor, and {self.character.bag.name} bag.")
         print("Loading world...")
-        self.character.status()
 
     def assign_stat(self, attribute_name):
         while True:
@@ -83,8 +81,8 @@ class Character:
         self.defense=defense
         self.dexterity=dexterity
         self.hits=hits
-        self.weapon= Weapon(name,type,damage=1)
-        self.armor=Armor(name,armor_value=1)
+        self.weapon= Weapon(name='Fist',type="Blunt",damage=1)
+        self.armor=Armor(name='Shield',armor_value=1)
         self.bag=Bag(name='Sack',size=1,contents=[])
                         
     def attack(self,target):
@@ -102,22 +100,19 @@ class Character:
             if total_damage > 0:
                 target.take_damage(total_damage)
                 # should print target hp after this print statement
-                return print(f"{self.name} attacks {target.name} for {total_damage} damage.")
+                return print(f"{self.name} attacks {target.name} for {total_damage} damage.\n")
             
             else:
-                print(f"{self.name} fails to damage {target.name}. "+
-                      f"{target.name}'s armor is too tough")
+                print(f"{self.name} fails to damage {target.name}.\n"+
+                      f"{target.name}'s armor is too tough.\n")
         else:
-            return print(f"{target.name} deftly dodges.")
+            return print(f"{target.name} deftly dodges.\n")
         
     def take_damage(self,total_damage):
         self.hp-=total_damage
         
     def heal(self,healing_value):
         self.hp+=healing_value
-        
-    def status(self):
-        print(f"""{self.name} has {self.hp} HP""")
         
     def level_up(self,stat):
         raise NotImplementedError()
@@ -127,3 +122,6 @@ class Character:
         
     def equip_armor(self,armor):
         self.armor=armor
+    
+    def equip_bag(self,bag):
+        self.bag=bag

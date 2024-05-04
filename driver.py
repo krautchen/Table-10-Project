@@ -67,7 +67,6 @@ class Map:
         #random chance for the puzzle to appear
         #game start
         self.currentRoom = self.playRoom[randomRoom]
-        print(self.currentRoom)
 
     def room_description(self, name):
         """Describes current room in the game, including what's in it and prompts the user on what to do.
@@ -108,9 +107,6 @@ class Map:
     
     def room_transition(self):
         """Handles player movement between rooms.
-        
-        Args:
-            userInput (str): the direction the player wants to move in
         """
         userInput = input(self.directionPrompt).lower()
         if userInput in self.neswCheck and userInput in self.currentRoom:
@@ -131,12 +127,13 @@ class Map:
     def has_puzzle(self):
         """Checks if the incoming room has a puzzle associated with it and if it does, executes the imported puzzle function.
         """
-        puzzleChance = random.randint(1, 10)
-        willGetPuzzle = random.randint(1,3) 
-        
+        puzzleChance = random.randint(1,3)
+        willGetPuzzle = random.randint(1,3)
+        self.puzzleEnd = "not complete"
         if self.puzzleEnd != "complete":
             if willGetPuzzle == puzzleChance:
-                self.puzzleEnd = p() 
+                self.puzzleEnd = p()
+                print(f"self.puzzleEnd: {self.puzzleEnd}")
     def has_items(self, char):
         """Checks if the current room has items, and if it does, asks the player if they want to equip after storing every item automatically.
         """
@@ -150,7 +147,7 @@ class Map:
             for item in room_items:
                 char.bag.store(item)
                 char.bag.organize()
-                print(f"{item.name} has been added to your inventory.")
+                print(f" ~~ {item.name} has been added to your inventory.")
                 # after this, it should remove the item from self.currentRoom["items"]
             self.currentRoom["items"].pop(category)
             
@@ -164,7 +161,9 @@ class Map:
                 print(f"{monster.name} encountered!\n")
                 while monster.hp > 0:
                     char.attack(monster)
-                    print("Monster attacked.\n")
+                    monster.attack(char)
+                    if char.hp == 0:
+                        self.gameEnd = True
                 print("Monster defeated! \n")     
                 self.currentRoom["monsters"].pop("trash")
             if "boss" in self.currentRoom["monsters"]:
@@ -172,10 +171,11 @@ class Map:
                 print(f"{monster.name} encountered!\n")
                 while monster.hp > 0:
                     char.attack(monster)
-                    print("Monster attacked.\n")
+                    monster.attack(char)
+                    if char.hp == 0:
+                        self.gameEnd = True
                 print("Monster defeated! \n")
                 self.currentRoom["monsters"].pop("boss")
-                    
     # def mapDriver(self): 
     #     """
     #     The main driver for the users movement in the map
