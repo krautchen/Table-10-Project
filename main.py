@@ -58,14 +58,14 @@ class Game:
             elif choice == "collect items":
                 new_map.has_items(new_char.character)
             elif choice == "move to next room":
-                new_map.has_puzzle()
                 new_map.room_transition()
+                new_map.has_puzzle()
                 self.equip(new_char.character)
             else:
                 print("Game over.")
                 new_map.gameEnd = True
     def equip(self, char):
-        user_input = self.invalid_input(self.equip_prompt)
+        user_input = self.input_check(self.equip_prompt)
         if user_input == "yes":
             print(char.bag.contents)
             equip_input = input(self.equip_type_prompt).lower()
@@ -95,7 +95,7 @@ class Game:
               {char.armor.name}\n
               {char.bag.name}""")
         print("------------------------------------------------------------------------------------------------")
-    def invalid_input(self, prompt):
+    def input_check(self, prompt):
         while True:
             try:
                 user_input = input(prompt).lower()

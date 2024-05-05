@@ -129,11 +129,9 @@ class Map:
         """
         puzzleChance = random.randint(1,3)
         willGetPuzzle = random.randint(1,3)
-        self.puzzleEnd = "not complete"
         if self.puzzleEnd != "complete":
             if willGetPuzzle == puzzleChance:
                 self.puzzleEnd = p()
-                print(f"self.puzzleEnd: {self.puzzleEnd}")
     def has_items(self, char):
         """Checks if the current room has items, and if it does, asks the player if they want to equip after storing every item automatically.
         """
@@ -147,7 +145,9 @@ class Map:
             for item in room_items:
                 char.bag.store(item)
                 char.bag.organize()
-                print(f" ~~ {item.name} has been added to your inventory.")
+                print(f"""\n
+                      ~~ {item.name} has been added to your inventory.
+                      \n""")
                 # after this, it should remove the item from self.currentRoom["items"]
             self.currentRoom["items"].pop(category)
             
