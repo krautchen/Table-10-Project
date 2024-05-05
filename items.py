@@ -54,6 +54,10 @@ class Weapon(Item):
         self.type = type
         self.damage = damage
         
+    def __str__(self):
+        """User-friendly string representation of the Weapon."""
+        return f"Weapon: {self.name}, Types: {self.type}, Damage: {self.damage}"
+        
     def __repr__(self):
         return f"Weapon(name={self.name}, type={self.type}, damage={self.damage})"
 
@@ -72,6 +76,10 @@ class Armor(Item):
         """
         super().__init__(name)
         self.armor_value = armor_value
+        
+    def __str__(self):
+        """print the object, but user-friendly"""
+        return f"Armor: {self.name}, Armor Value: {self.armor_value}"
         
     def __repr__(self):
         """print the object
@@ -96,6 +104,10 @@ class Consumable(Item):
         """
         super().__init__(name)
         self.healing_value = healing_value
+        
+    def __str__(self):
+        """print the object, but user-friendly"""
+        return f"Consumable: {self.name}, Healing Value: {self.healing_value}"
         
     def __repr__(self):
         """print the object
@@ -127,6 +139,12 @@ class Bag(Item):
         self.size = size
         self.contents = contents
         
+    def __str__(self):
+        """print the object, but user-friendly"""
+        return f"""Bag: {self.name}
+                    Size: {self.size}
+                    Contents: {self.contents}"""
+                        
     def __repr__(self):
         """print the object
 
