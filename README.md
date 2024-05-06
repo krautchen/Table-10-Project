@@ -1,6 +1,6 @@
 # Purpose of each File in Directory
 #### `main.py`
-- 
+- Contains the overarching Game class, which handles the logic for room interaction, movement, and character state for a Game instance.
 
 #### `charcter.py`
 - Contains the class for creating a Character object.
@@ -17,7 +17,7 @@ Weapons, Armor, Consumables, and Bags.
 inherits most of its attributes from the Character object.
 
 #### `puzzle.py`
-- 
+- Contains the puzzle function, which runs randomly to produce a puzzle for a locked room.
 
 #### `fantasy_items.json`
 - A dictionary with four lists of dictionaries for items 
@@ -26,7 +26,7 @@ inherits most of its attributes from the Character object.
 - A dictionary with two lists of dictionaries for monsters
 
 #### `puzzles.json`
-- 
+- Contains the puzzles for the game with prompt, correct code, and hints.
 
 #### `rooms.json`
 - A dictionary with all of the rooms and valid carindal directions for movement
@@ -36,12 +36,18 @@ inherits most of its attributes from the Character object.
 <br/>
 
 # How to run from cli
-
+- python(3) main.py fantasy
+  or
+- python(3) main.py scifi
+     - but it's not implemented yet
 <br/>
 <br/>
 
 # How to use and interpret output
-
+- output runs on user input, so the choices that the program presents and the following response
+- provides context for what the user can do next
+- for instance, if you want to equip an item before moving into the next room, choosing yes
+- will present the item options and choosing no will move you to the next room
 <br/>
 <br/>
 
@@ -50,12 +56,14 @@ inherits most of its attributes from the Character object.
 | Function/method | Primary Author | Techniques |
 |----------|----------|----------|
 |   argparse/commandline  |   Richard Salters   |   argumentParser   |
-|   driver  |   Richard Salters   |   With statement   |
+|   room_description  |   Richard Salters   |   f-strings   |
 |   puzzle  |   Michelle Akem   |   json.load()   |
 |   puzzle  |   Michelle Akem   |   Regex expressions   |
 |   bag.organize()  |   Noah Hibbler   |   Lambda key function   |
 |   Character class \__init__ |   Noah Hibbler   |   Composition of two classes   |
-
+|   equip   |   Michelle Akem   |    Sequence unpacking   |
+|   __str__ |   Noah Hibbler  |  Magic methods   |
+|   has_items   |   Michelle Akem   |   Comprehensions   |
 <br/>
 <br/>
 
