@@ -177,7 +177,8 @@ class Map:
     def has_items(self, char):
         """Checks if the current room has items, and if it does, stores and
         organizes the items.
-        
+        PA: Michelle Akem
+        Technique: Comprehensions (dictionary and list)
         Side effects:
             changes itemCheck attribute, currentRoom attribute, and
             prints to stdout

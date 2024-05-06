@@ -34,7 +34,7 @@
         "s": "4", "w": "invalid movement", "current": "3",
          "items":{"weapons": "Club"}, "monsters":{"boss": "Balrog"}},
         "4":{"n": "3", "e": "invalid movement", 
-        "s": "invalid movement", "w": "invalid movement", "current": "4", 
+        "s": "5", "w": "invalid movement", "current": "4", 
         "items": {"consumables": "Medium Healing Potion"}},
         "5": {"n": "4", "e": "invalid movement", "s":"invalid movement",
         "w": "invalid movement", "current": "5", "monsters":{"boss": "Balrog"},

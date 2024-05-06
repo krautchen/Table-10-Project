@@ -10,12 +10,17 @@ from random import randint
 
 # if the roll is an odd number then the puzzle function is called and a random 
 # puzzle is loaded from the json along with any necessary items, enemies, etc.
-# character should have a current_room attribute to reference and update within function
+# character should have a current_room attribute to reference and update within 
+# function
 
 def puzzle():
     """Generates a random puzzle if the dice roll requires it. Updates 
     character's current_room attribute conditionally based on puzzle
     completion.
+    PA: Michelle Akem
+    Techniques: regex expressions
+    Returns:
+        str: status of the puzzle
     
     Side effects:
         Prints a puzzle prompt and results of the guesses to stdout.
