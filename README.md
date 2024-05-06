@@ -1,6 +1,7 @@
 # Purpose of each File in Directory
 #### `main.py`
 - Contains the overarching Game class, which handles the logic for room interaction, movement, and character state for a Game instance.
+- Contains the main function for calling an instance of Game and a parse_args method to retrieve the genre for the game in the cli.
 
 #### `charcter.py`
 - Contains the class for creating a Character object.
