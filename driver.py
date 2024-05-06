@@ -36,10 +36,10 @@ class Map:
     
     """
     def __init__(self):
-        """
-        Initalizes a map object
+        """Initalizes a map object
+        
         side effects:
-            Initalizes all the values
+            Initalizes all the values as attributes
         """
         self.directionPrompt = "Which direction would you like to go? "
         self.roomPrompt = "What do you want to do? Type (fight monsters), (collect items), or (move to next room). Or type quit to quit: "
@@ -60,39 +60,75 @@ class Map:
             map = json.load(f)
         
         #picks a random map
-        randomMap = random.choice(list(map))
-        self.playRoom = map[randomMap]
+        self.randomMap = random.choice(list(map))
+        self.playRoom = map[self.randomMap]
         #picks random room in map
-        randomRoom= str(random.randint(1, len(map[randomMap])))
+        randomRoom= str(random.randint(1, len(map[self.randomMap])))
         #random chance for the puzzle to appear
         #game start
         self.currentRoom = self.playRoom[randomRoom]
 
+    def __str__(self):
+        """Returns an informal, visual representation of the current map.
+        
+        Returns:
+            str: a visual representation of the current map.
+        """
+        if self.randomMap == "1x5":
+            return """
+        +---+         N
+        | 1 |         |
+        +---+      W -+- E
+        | 2 |         |
+        +---+         S
+        | 3 |
+        +---+
+        | 4 |
+        +---+
+        | 5 |
+        +---+
+        """
+        elif self.randomMap == "3x3":
+            return """
+        +---+---+---+         N
+        | 1 | 2 | 3 |         |
+        +---+---+---+      W -+- E
+        | 4 | 5 | 6 |         |
+        +---+---+---+         S
+        | 7 | 8 | 9 |
+        +---+---+---+
+        """
     def room_description(self, name):
         """Describes current room in the game, including what's in it and prompts the user on what to do.
         
+        Args:
+            name (str): the name of the player.
+            
+        Returns:
+            str: a choice of what to do in the room.
+            
         Side effects:
             prints the description of the current room
         """
         if "monsters" in self.currentRoom or "items" in self.currentRoom:
             if "items" not in self.currentRoom:
                 print(f"""Room description:\n
-                {name} is currently in room {self.currentRoom["current"]}.
+                {name} is currently in room {self.currentRoom["current"]} of the {self.randomMap} map.
                 This room has {len(self.currentRoom["monsters"])} monsters and 0 items.
                 """)
             elif "monsters" not in self.currentRoom:
                 print(f"""Room description:\n
-                {name} is currently in room {self.currentRoom["current"]}.
+                {name} is currently in room {self.currentRoom["current"]} of the {self.randomMap} map.
                 This room has 0 monsters and {len(self.currentRoom["items"])} items.
                 """)
             else:
                 print(f"""Room description:\n
-                    {name} is currently in room {self.currentRoom["current"]}.
+                    {name} is currently in room {self.currentRoom["current"]} of the {self.randomMap} map.
                     This room has {len(self.currentRoom["monsters"])} monsters and {len(self.currentRoom["items"])} items.
                     """)
         else:
             print(f"""Room description:\n
-                {name} is currently in room {self.currentRoom["current"]}.
+                {name} is currently in room {self.currentRoom["current"]} of the {self.randomMap} map.
                 This room has no monsters or items.
                 """)
         
@@ -107,6 +143,9 @@ class Map:
     
     def room_transition(self):
         """Handles player movement between rooms.
+        
+        Side effects:
+            changes the current room
         """
         userInput = input(self.directionPrompt).lower()
         if userInput in self.neswCheck and userInput in self.currentRoom:
@@ -125,7 +164,10 @@ class Map:
                 self.currentRoom = current
     
     def has_puzzle(self):
-        """Checks if the incoming room has a puzzle associated with it and if it does, executes the imported puzzle function.
+        """Creates a random chance of executing the imported puzzle function.
+        
+        Side effects:
+            changes the puzzleEnd attribute
         """
         puzzleChance = random.randint(1,3)
         willGetPuzzle = random.randint(1,3)
@@ -133,7 +175,12 @@ class Map:
             if willGetPuzzle == puzzleChance:
                 self.puzzleEnd = p()
     def has_items(self, char):
-        """Checks if the current room has items, and if it does, asks the player if they want to equip after storing every item automatically.
+        """Checks if the current room has items, and if it does, stores and
+        organizes the items.
+        
+        Side effects:
+            changes itemCheck attribute, currentRoom attribute, and
+            prints to stdout
         """
         if "items" in self.currentRoom:
             self.itemCheck = True
@@ -145,14 +192,19 @@ class Map:
             for item in room_items:
                 char.bag.store(item)
                 char.bag.organize()
-                print(f"""\n
+                print(f"""
                       ~~ {item.name} has been added to your inventory.
                       \n""")
-                # after this, it should remove the item from self.currentRoom["items"]
-            self.currentRoom["items"].pop(category)
+        # after this, it should remove the item from self.currentRoom["items"]
+        self.currentRoom["items"] = {}
             
     def has_monsters(self, char):
-        """Checks if the current room has monsters, and if it does, engage combat sequence.
+        """Checks if the current room has monsters, and if it does, 
+        engage combat sequence.
+        
+        Side effects:
+            changes monsterCheck attribute, currentRoom attribute, gameEnd 
+            attribute and prints to stdout
         """
         if "monsters" in self.currentRoom:
             self.monsterCheck = True

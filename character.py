@@ -29,7 +29,6 @@ class CharacterCreator:
 
         self.character = Character(name=name, strength=strength, defense=defense, dexterity=dexterity)
         print(f"\nCharacter '{self.character.name}' created with the following attributes: \n{self.character.strength} strength \n{self.character.defense} defense \n{self.character.dexterity} dexterity")
-        print("Loading world...")
 
     def assign_stat(self, attribute_name):
         while True:
