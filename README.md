@@ -38,17 +38,15 @@ inherits most of its attributes from the Character object.
 
 # How to run from cli
 - python(3) main.py fantasy
-  or
+__OR__
 - python(3) main.py scifi
      - but it's not implemented yet
 <br/>
 <br/>
 
 # How to use and interpret output
-- output runs on user input, so the choices that the program presents and the following response
-- provides context for what the user can do next
-- for instance, if you want to equip an item before moving into the next room, choosing yes
-- will present the item options and choosing no will move you to the next room
+- output runs on user input, so the choices that the program presents and the following response provides context for what the user can do next
+- for instance, if you want to equip an item before moving into the next room, choosing yes will present the item options and choosing no will move you to the next room
 <br/>
 <br/>
 
