@@ -57,7 +57,7 @@ inherits most of its attributes from the Character object.
 |----------|----------|----------|
 |   argparse/commandline  |   Richard Salters   |   argumentParser   |
 |   room_description  |   Richard Salters   |   f-strings   |
-|   puzzle  |   Michelle Akem   |   json.load()   |
+|   Map class __init__  |   Richard Salters   |   json.load()   |
 |   puzzle  |   Michelle Akem   |   Regex expressions   |
 |   bag.organize()  |   Noah Hibbler   |   Lambda key function   |
 |   Character class \__init__ |   Noah Hibbler   |   Composition of two classes   |
