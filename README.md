@@ -1,6 +1,7 @@
 # Purpose of each File in Directory
 #### `main.py`
-- 
+- Contains the overarching Game class, which handles the logic for room interaction, movement, and character state for a Game instance.
+- Contains the main function for calling an instance of Game and a parse_args method to retrieve the genre for the game in the cli.
 
 #### `charcter.py`
 - Contains the class for creating a Character object.
@@ -17,7 +18,7 @@ Weapons, Armor, Consumables, and Bags.
 inherits most of its attributes from the Character object.
 
 #### `puzzle.py`
-- 
+- Contains the puzzle function, which runs randomly to produce a puzzle for a locked room.
 
 #### `fantasy_items.json`
 - A dictionary with four lists of dictionaries for items 
@@ -26,7 +27,7 @@ inherits most of its attributes from the Character object.
 - A dictionary with two lists of dictionaries for monsters
 
 #### `puzzles.json`
-- 
+- Contains the puzzles for the game with prompt, correct code, and hints.
 
 #### `rooms.json`
 - A dictionary with all of the rooms and valid carindal directions for movement
@@ -36,11 +37,17 @@ inherits most of its attributes from the Character object.
 <br/>
 
 # How to run from cli
-
+- python(3) main.py fantasy    
+__OR__
+- python(3) main.py scifi
+     - but it's not implemented yet
 <br/>
 <br/>
 
 # How to use and interpret output
+- output runs on user input, so the program presents choices denoted by a colon or prompt and the user responds with typed input, providing context for what the user can do next
+- for instance, if you want to equip an item before moving into the next room, choosing yes will present the item options and choosing no will move you to the next room
+- if the user inputted something wrong, it will keep the user at that prompt and provide an error message above until the input is valid
 
 <br/>
 <br/>
@@ -50,12 +57,14 @@ inherits most of its attributes from the Character object.
 | Function/method | Primary Author | Techniques |
 |----------|----------|----------|
 |   argparse/commandline  |   Richard Salters   |   argumentParser   |
-|   driver  |   Richard Salters   |   With statement   |
-|   puzzle  |   Michelle Akem   |   json.load()   |
+|   room_description  |   Richard Salters   |   f-strings   |
+|   Map class \__init__  |   Richard Salters   |   json.load()/With statement|            
 |   puzzle  |   Michelle Akem   |   Regex expressions   |
 |   bag.organize()  |   Noah Hibbler   |   Lambda key function   |
 |   Character class \__init__ |   Noah Hibbler   |   Composition of two classes   |
-
+|   equip   |   Michelle Akem   |    Sequence unpacking   |
+|   \__str__ |   Noah Hibbler  |  Magic methods   |
+|   has_items   |   Michelle Akem   |   Comprehensions   |
 <br/>
 <br/>
 
