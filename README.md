@@ -37,7 +37,7 @@ inherits most of its attributes from the Character object.
 <br/>
 
 # How to run from cli
-- python(3) main.py fantasy \n
+- python(3) main.py fantasy    
 __OR__
 - python(3) main.py scifi
      - but it's not implemented yet
