@@ -57,12 +57,12 @@ inherits most of its attributes from the Character object.
 |----------|----------|----------|
 |   argparse/commandline  |   Richard Salters   |   argumentParser   |
 |   room_description  |   Richard Salters   |   f-strings   |
-|   Map class __init__  |   Richard Salters   |   json.load()   |
+|   Map class \__init__  |   Richard Salters   |   json.load()   |
 |   puzzle  |   Michelle Akem   |   Regex expressions   |
 |   bag.organize()  |   Noah Hibbler   |   Lambda key function   |
 |   Character class \__init__ |   Noah Hibbler   |   Composition of two classes   |
 |   equip   |   Michelle Akem   |    Sequence unpacking   |
-|   __str__ |   Noah Hibbler  |  Magic methods   |
+|   \__str__ |   Noah Hibbler  |  Magic methods   |
 |   has_items   |   Michelle Akem   |   Comprehensions   |
 <br/>
 <br/>
