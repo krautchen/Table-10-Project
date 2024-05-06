@@ -45,8 +45,10 @@ __OR__
 <br/>
 
 # How to use and interpret output
-- output runs on user input, so the choices that the program presents and the following response provides context for what the user can do next
+- output runs on user input, so the program presents choices denoted by a colon or prompt and the user responds with typed input, providing context for what the user can do next
 - for instance, if you want to equip an item before moving into the next room, choosing yes will present the item options and choosing no will move you to the next room
+- if the user inputted something wrong, it will keep the user at that prompt and provide an error message above until the input is valid
+
 <br/>
 <br/>
 
