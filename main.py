@@ -19,6 +19,7 @@ class Game:
         Args:
             genre (str): the genre of the game
         """
+        self.playPoints = 0
         self.genre = genre
         self.equip_prompt = """Would you like to equip any items from your bag?\n
         > Yes\n
@@ -69,15 +70,23 @@ class Game:
         new_map = Map()
         self.load_genre()
         while new_map.gameEnd != True:
+            if self.playPoints == 5:
+                print("You won! See you in the next game!")
+                new_map.gameEnd = True
+                break
             print(new_map)
             choice = new_map.room_description(new_char.character.name)
             if choice == "fight monsters":
                 new_map.has_monsters(new_char.character)
+                self.playPoints += 1
             elif choice == "collect items":
                 new_map.has_items(new_char.character)
+                self.playPoints += 1
             elif choice == "move to next room":
                 new_map.room_transition()
                 new_map.has_puzzle()
+                if new_map.puzzleEnd == "complete":
+                    self.playPoints += 1
                 self.equip(new_char.character)
                 self.status(new_char.character)
             else:
@@ -124,12 +133,12 @@ class Game:
         Side effects:
             Prints to stdout
         """
-        print("------------------------------------------------------------------------------------------------")
-        print(f"""{char.name}, you currently have {char.hp} HP and the following items equipped:\n
+        print("---------------------------------------------------------------------------------------------------------------")
+        print(f"""{char.name}, you currently have {char.hp} HP, {self.playPoints} points, and the following items equipped:\n
               {char.weapon.name}\n
               {char.armor.name}\n
               {char.bag.name}""")
-        print("------------------------------------------------------------------------------------------------")
+        print("---------------------------------------------------------------------------------------------------------------")
     def input_check(self, prompt):
         """Checks user input for equip prompt to ensure it is valid.
 
