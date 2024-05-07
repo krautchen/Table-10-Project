@@ -2,7 +2,8 @@ from character import *
 import json
 
 def load_monsters(file_path):
-    """Load monsters
+    """Loads monsters from a file.
+    PA:  Noah Hibbler
 
     Args:
         file_path (str): Path to monster data file
@@ -32,6 +33,14 @@ def load_monsters(file_path):
     return monsters
 
 class Monster(Character):
+    """Defines a monster from a Character class.
+    PA: Noah Hibbler
+    Attributes:
+        exp_val (int): moster experience value
+
+    Args:
+        Character (class): Character class for base attributes
+    """
     
     def __init__(self,
                 character_type='Monster',
@@ -46,8 +55,8 @@ class Monster(Character):
                 armor={},
                 bag=[],
                 exp_val=1):
-        """Initializes monster object
-
+        """Initializes monster object.
+        PA: Noah Hibbler
         Args:
             character_type (str, optional): Type. Defaults to 'Monster'.
             name (str, optional): Monster name. Defaults to 'Groht'.
@@ -61,6 +70,9 @@ class Monster(Character):
             armor (dict, optional): Monster armor object. Defaults to {}.
             bag (list, optional): Monster bag. Defaults to [].
             exp_val (int, optional): Monster experience value. Defaults to 1.
+            
+        Side effects:
+            Sets monster attributes
         """
         super().__init__(character_type,name,level,hp,strength,defense,dexterity,
                          hits,weapon,armor,bag)
@@ -69,8 +81,9 @@ class Monster(Character):
         
         
     def __repr__(self):
-        """Formal representation of the monster
-
+        """Formal representation of the monster.
+        PA: Noah Hibbler
+        
         Returns:
             str: Monster attributes
         """

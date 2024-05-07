@@ -19,7 +19,6 @@ class Game:
         Args:
             genre (str): the genre of the game
         """
-        self.playPoints = 0
         self.genre = genre
         self.equip_prompt = """Would you like to equip any items from your bag?\n
         > Yes\n
@@ -36,7 +35,7 @@ class Game:
         
     def load_genre(self):
         """Loads the items and monsters for a genre.
-        
+        PA: Michelle Akem
         Side effects:
             Sets self.items and self.monsters attributes
         
@@ -62,15 +61,21 @@ class Game:
         Side effects:
             Prints to stdout and sets gameEnd attribute
         """
-        print("----------------------------------------------------------------")
-        print(f"Welcome to the Basic World of {self.genre.capitalize()}!")
-        print("----------------------------------------------------------------")
+        print("-----------------------------------------------------------------------")
+        print(f"""Welcome to the Basic World of {self.genre.capitalize()}!\n
+              
+              Step into a world of surprise and excitement. Players get points\n
+              randomly from interacting with the game through fighting monsters,\n
+              collecting items, and solving puzzles. You could win by moving through\n
+              2 rooms or 10; you just have to get 10 points! Good luck young hero!
+              """)
+        print("-----------------------------------------------------------------------")
         new_char = CharacterCreator()
         new_char.create_character()
         new_map = Map()
         self.load_genre()
         while new_map.gameEnd != True:
-            if self.playPoints == 5:
+            if new_char.points == 10:
                 print("You won! See you in the next game!")
                 new_map.gameEnd = True
                 break
@@ -78,17 +83,17 @@ class Game:
             choice = new_map.room_description(new_char.character.name)
             if choice == "fight monsters":
                 new_map.has_monsters(new_char.character)
-                self.playPoints += 1
+                new_char.points += 1
             elif choice == "collect items":
                 new_map.has_items(new_char.character)
-                self.playPoints += 1
+                new_char.points += 1
             elif choice == "move to next room":
                 new_map.room_transition()
                 new_map.has_puzzle()
                 if new_map.puzzleEnd == "complete":
-                    self.playPoints += 1
+                    new_char.points += 1
                 self.equip(new_char.character)
-                self.status(new_char.character)
+                self.status(new_char)
             else:
                 print("Game over.")
                 new_map.gameEnd = True
@@ -135,10 +140,10 @@ class Game:
             Prints to stdout
         """
         print("---------------------------------------------------------------------------------------------------------------")
-        print(f"""{char.name}, you currently have {char.hp} HP, {self.playPoints} points, and the following items equipped:\n
-              {char.weapon.name}\n
-              {char.armor.name}\n
-              {char.bag.name}""")
+        print(f"""{char.character.name}, you currently have {char.character.hp} HP, {char.points} points, and the following items equipped:\n
+              > {char.character.weapon.name}\n
+              > {char.character.armor.name}\n
+              > {char.character.bag.name}""")
         print("---------------------------------------------------------------------------------------------------------------")
     def input_check(self, prompt):
         """Checks user input for equip prompt to ensure it is valid.
@@ -178,7 +183,7 @@ def main(genre):
 
 def parse_args(arglist):
     """Parses arguments from command line.
-
+    PA: Richard Salters
     Args:
         arglist (list): list of command line arguments
 

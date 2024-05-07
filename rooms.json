@@ -38,6 +38,6 @@
         "items": {"consumables": "Medium Healing Potion"}},
         "5": {"n": "4", "e": "invalid movement", "s":"invalid movement",
         "w": "invalid movement", "current": "5", "monsters":{"boss": "Balrog"},
-        "items": {"weapons": "Sword", "armor": "Studded Leather"}}
+        "items": {"weapons": "Sword", "armor": "Chainmail Shirt"}}
     }
 }

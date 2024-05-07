@@ -15,7 +15,7 @@ created
 class Map:
     """
     The map that is being used.
-
+    PA: Richard Salters
     Attributes:
         prompt: string
             a prompt asking which direction to travel
@@ -37,16 +37,23 @@ class Map:
     """
     def __init__(self):
         """Initalizes a map object
-        
+        PA: Richard Salters
         side effects:
             Initalizes all the values as attributes
         """
-        self.directionPrompt = "Which direction would you like to go? "
-        self.roomPrompt = "What do you want to do? Type (fight monsters), (collect items), or (move to next room). Or type quit to quit: "
+        self.directionPrompt = "Which direction would you like to go (n/s/e/w)? "
+        self.roomPrompt = """What do you want to do?\n
+        > fight monsters\n
+        > collect items\n
+        > move to next room\n
+        > quit
+        Type response: """
         self.invalidDirection = "invalid choice, please choose another directon"
         self.neswError = "please choose a movement of nesw" 
         self.neswCheck = ["n", "s", "e", "w"]
-        self.playInput = "would you like to continue? (yes/no)"
+        self.playInput = """would you like to continue?\n
+        > yes\n
+        > no"""
         self.gameEnd = False 
         self.puzzleEnd = "not complete"
         self.itemCheck = False
@@ -70,7 +77,7 @@ class Map:
 
     def __str__(self):
         """Returns an informal, visual representation of the current map.
-        
+        PA: Richard Salters
         Returns:
             str: a visual representation of the current map.
         """
@@ -100,7 +107,7 @@ class Map:
         """
     def room_description(self, name):
         """Describes current room in the game, including what's in it and prompts the user on what to do.
-        
+        PA: Richard Salters
         Args:
             name (str): the name of the player.
             
@@ -143,7 +150,7 @@ class Map:
     
     def room_transition(self):
         """Handles player movement between rooms.
-        
+        PA: Richard Salters 
         Side effects:
             changes the current room
         """
@@ -162,10 +169,13 @@ class Map:
                 prevRoom = self.currentRoom["current"]
                 current = self.playRoom[self.currentRoom[userInput]]
                 self.currentRoom = current
+        else:
+            print(self.invalidDirection)
+            self.room_transition()
     
     def has_puzzle(self):
         """Creates a random chance of executing the imported puzzle function.
-        
+        PA: Richard Salters
         Side effects:
             changes the puzzleEnd attribute
         """
@@ -202,7 +212,7 @@ class Map:
     def has_monsters(self, char):
         """Checks if the current room has monsters, and if it does, 
         engage combat sequence.
-        
+        PA: Richard Salters 
         Side effects:
             changes monsterCheck attribute, currentRoom attribute, gameEnd 
             attribute and prints to stdout
