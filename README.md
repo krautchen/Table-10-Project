@@ -58,7 +58,8 @@ __OR__
 |----------|----------|----------|
 |   argparse/commandline  |   Richard Salters   |   argumentParser   |
 |   room_description  |   Richard Salters   |   f-strings   |
-|   Map class \__init__  |   Richard Salters   |   json.load()/With statement|            
+|   Map class \__init__  |   Richard Salters   |   json.load()|  
+|   Map class \__init__  |   Richard Salters   |   With statement|     
 |   puzzle  |   Michelle Akem   |   Regex expressions   |
 |   bag.organize()  |   Noah Hibbler   |   Lambda key function   |
 |   Character class \__init__ |   Noah Hibbler   |   Composition of two classes   |
